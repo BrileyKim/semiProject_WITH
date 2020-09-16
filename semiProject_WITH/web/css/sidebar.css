@@ -1,0 +1,157 @@
+/* Copy and Paste url of the google font Nto Serif KR */
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap');
+
+ /* Apply Noto Serif KR to all elements */
+ *{
+ 	font-family:"Noto Serif KR";
+ }
+ /* Make elements float to right, 
+ create space right side of the side-bar  */
+.side-bar{
+	float:right;
+	margin-right:10px;
+}
+
+/* Apply css to a tags in the side-bar*/
+/* Starts with remove underline */
+a.logo, a.search, a.login, a.mypage{
+	text-decoration:none
+}
+/* Change logo a tag writing mode vertically*/
+a.logo{
+	writing-mode:vertical-rl;
+	font-size:22px;
+	color:black;
+}
+/* font-weight:lighter makes font thiner */
+a.search{
+	font-size:21px;
+	font-weight:lighter;
+	color:black;
+}
+a.login, a.mypage{
+	writing-mode:vertical-rl;
+	color:rgb(51,51,51);
+}
+
+/* Make login-client div invisible at first(opacity:0)
+	and show this when client click login a tag 
+	change width 1px to 350px in 2seconds by transition */
+#login-client{
+	padding:0;
+	margin:0;
+	border-radius:2px;
+	background-color:rgba(250,247,242,0.5);
+	text-align:center;
+	height:300px;
+	position:fixed;
+	top:180px;
+	right:65px;
+	transition:2s;
+	opacity:0;
+	width:1px;
+	overflow:hidden;
+}
+
+/* ul include id and password input 
+	dots are default design of ul tag 
+	so if you want list doesn't look like list, 
+	you have to put list-style-type:none */
+#login-client>ul{
+	list-style-type:none;
+	width:250px;
+	margin-left:50px;
+	clear:both;
+}
+/* id input type text */
+#id{
+	margin-left:-148px;
+	margin-top:65px;
+	background-color:white;
+	text-align:center;
+	outline:none;
+	width:230px;
+	height:36px;
+	border:none;
+	font-size:25px;
+	border-radus:2px;
+	position:absolute;
+}
+#pw{
+	background-color:white;
+	margin-left:-148px;
+	margin-top:122px;
+	text-align:center;
+	font-size:25px;
+	outline:none;
+	width:230px;
+	height:36px;
+	border:none;
+	border-radius:2px;
+	position:absolute;
+}
+
+/* div includes buttons */
+#login-btns{
+	position:absolute;
+	width:100%;
+	height:200px;
+	margin-top:-10px;
+	top:200px;
+}
+
+/* login button */
+#login-button{
+	border-radius:2px;
+	background-color:rgba(114,133,63,0.9);
+	border:none;
+	outline:none;
+	width:45%;
+	height:36px;
+	position:absolute;
+	left:10px;
+	top:50px;
+	font-size:23px;
+}
+#join-button{
+	border-radius:2px;
+	background-color:white;
+	border:none;
+	outline:none;
+	width:45%;
+	height:36px;
+	position:absolute;
+	left:180px;
+	top:50px;
+	font-size:23px;
+}
+
+/* find id div tag */
+#login-find{
+	margin-top:27px;
+	font-size:20px;
+	padding:0;
+	position:absolute;
+	width:100%;
+	height:30px;
+	top:162px;
+	left:5px;
+	text0decoration:none;
+	color:black;
+}
+#find-id{
+	padding:0;
+	margin:0;
+	position:absolute;
+	left:117px;
+	width:110px;
+	height:30px;
+	font-size:23px;
+	text-decoration:none;
+	color:black;
+}
+/* Make all elements of which class is login-show */
+.login-show{
+    opacity: 0;
+}
+

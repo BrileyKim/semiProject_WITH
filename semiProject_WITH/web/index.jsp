@@ -8,5 +8,9 @@
 </head>
 <body>
 	<%@ include file="/views/common/header.jsp" %>
+	<section id="main-container">
+		<%@ include file="/views/common/sidebar.jsp" %>
+	
+	</section>
 </body>
 </html>
