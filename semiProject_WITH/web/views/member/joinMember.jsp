@@ -18,8 +18,8 @@
 					<table>
 						<tr>
 							<td>아이디</td>
-							<td><input type="text" placeholder="4글자이상" name="Id" id="Id" required oninput="checkId();"></td>
-							<td><span id="chkMsg"></span></td>
+							<td><input type="text" placeholder="4글자이상" name="Id" id="Id" required ></td>
+							<td><div id="chkMsg"></div></td>
 						</tr>
 					</table>
 				</div>
@@ -32,17 +32,23 @@
 		</div>
 	</section>
 	<script>
-		function checkId(){
-			var id = $("#Id").val();
-			$.ajax({
-				url:"<%=request.getContextPath()%>/checkIdDuplicate",
-				type:"post",
-				data:{id:id},
-				sucess:data=>{
-					console.log(data);
-				}
-			})
-		}
+		$(function(){
+			var newValue;
+            $("#Id").on("propertychange change keyup paste input", function() {
+               newValue = $(this).val();
+				$.ajax({
+					url:"<%=request.getContextPath()%>/checkIdDuplicate",
+					type:"get",
+					data:{"id":newValue},
+					dataType:"html",
+					success:data=>{
+						console.log(data);
+						$("#chkMsg").html(data);
+					}
+				});
+            });
+		})
+
 	</script>
 </body>
 </html>

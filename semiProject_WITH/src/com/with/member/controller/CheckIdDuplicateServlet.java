@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.with.member.model.service.MemberService;
 import com.with.member.model.vo.Member;
 
 /**
@@ -32,10 +33,10 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 		// Check the existence of that id in DataBase
 		// Then send result to checkIdDuplicate.jsp
 		String id = request.getParameter("id");
-		Member m = new MemberService().checkIdDuplicate(id);
-		request.setAttribute("result", m);
 		
-		
+			Member m = new MemberService().checkIdDuplicate(id);
+			request.setAttribute("result", m);
+			request.getRequestDispatcher("/views/member/checkIdDuplicate.jsp").forward(request, response);		
 	}
 
 	/**
