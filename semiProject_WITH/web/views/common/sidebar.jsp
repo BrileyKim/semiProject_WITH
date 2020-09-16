@@ -49,9 +49,12 @@
 
 <!-- Create side-bar div tag -->
 <div class="side-bar">
-	<!-- Create logo, login, mypage a tag 
+	<!-- Create logo, search, login, mypage a tag 
 		Use br tag for spacing easily -->
 	<a href="#home" class="logo">www.WITH.com</a>
+	<br>
+	<br>
+	<a href="#search" class="search"><i class="fas fa-search"></i></a>
 	<br>
 	<br>
 	<a href="#login" class="login">Login</a>
