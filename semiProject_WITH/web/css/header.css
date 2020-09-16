@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap');
+
+/* overflow is clipped, the rest of the content will be invisible*/
+/* top bottom padding 20px, left right padding 10px */
+.header{
+	overflow:hidden; 
+	padding: 20px 10px;
+}
+
+/* 	Make elements float to the left */
+/*  Centers the text */
+/*	Don't look like a tag, color and text-decoration */
+/*	Top, Bottom, Left, Right padding 12px;  */
+.header a{
+	float:left;
+	text-align:center;
+	color:black;
+	text-decoration:none;
+	font-size:24px;
+	padding:12px;
+}
+
+/*	When mouse hovered, font color turns into white  */
+.header a:hover{
+	color:white;	
+}
+
+/* Make header-left div float to the left */
+.header-left{
+	float:left;
+}
+
+/* When client minimize the page */
+@media screen and (max-width: 500px){
+	.header a{
+		float:none;
+		display:block;
+		text-align:left;
+	}
+	.header-left{
+		float:none;
+	}
+}
