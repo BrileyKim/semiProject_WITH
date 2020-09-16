@@ -41,7 +41,7 @@
 				<input type="submit" value="login" id="login-button">
 				<!-- If you want to use two button in one form tag, 
 					have to write type="button" to the button that is not a submit -->
-				<button type="button" id="join-button" onclick="location.replace('<%=request.getContextPath()%>/join');">Join</button>
+				<button type="button" id="join-button" onclick="location.replace('<%=request.getContextPath()%>/joinMember');">Join</button>
 			</div>
 		</div>
 	</form>
