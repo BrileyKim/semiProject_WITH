@@ -42,6 +42,7 @@
 			}else{
 				if(number==<%=authNum%>){
 					alert("인증되었습니다.");
+					$(opener.document).find("#envelope").css("color","green");
 					self.close();
 				}else{
 					alert("틀린번호 입니다. 인증번호를 다시 입력해주세요.");

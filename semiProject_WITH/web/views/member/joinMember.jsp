@@ -12,18 +12,37 @@
 		width:700px;
 	}
 	#join-table-essential{
-		margin: 40px 0;
+		padding-top:20px;
+		margin-top:25px;
+		padding-right:10px;
+		padding-left:10px;
 		border-spacing: 10px 10px;
-		text-align:left;
+		text-align:center;
 		float:left;
-	}
-	#join-table-optional{
-		margin: 40px 0;
-		border-spacing: 10px 10px;
-		
-	}
+		background-color:rgba(250,247,242,0.7);
+		border-radius:2px;
+	}	
 	.add{
 		width:60px;
+	}
+	#submitJoin{
+		margin-right:10px;
+		margin-top:10px;
+		margin-bottom:10px;
+		font-size:16px;
+		border:1px gray solid;
+		border-radius:2px;
+		width:60px;
+		background-color:rgba(114,133,63,0.9);
+	}
+	#resetJoin{
+	margin-top:10px;
+		font-size:16px;
+		margin-bottom:10px;
+		border-radius:2px;
+		border:1px gray solid;
+		width:60px;
+		background-color:white;
 	}
 </style>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -59,12 +78,13 @@
 						</tr>
 						<tr>
 							<td>비밀번호 확인</td>
-							<td><input type="password" id="Password2" class="inputPw"></td>
-							<td colspan="2">
+							<td><input type="password" id="Password2" class="inputPw" required></td>
+							<td>
 								<div id="chkPw">
 									<i id="showchk" class="fas fa-check" style="color:gray;"></i>
 								</div>
 							</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>닉네임</td>
@@ -77,14 +97,14 @@
 						</tr>
 						<tr>
 							<td>전화번호</td>
-							<td><input type="text" name="phone" id="phone"></td>
+							<td><input type="text" name="phone" id="phone" required></td>
 							<td colspan="2"></td>
 						</tr>
 						<tr>
 							<td>이메일</td>
-							<td><input type=text id="email" name="email"></td>
-							<td><i class="fa fa-envelope" onclick="fn_email_check();"></i></td>
-							<td><span id="emailMsg">이메일 입력 후 버튼을 눌러주세요.</span></td>
+							<td><input type=text id="email" name="email" required></td>
+							<td><i id="envelope" class="fa fa-envelope" onclick="fn_email_check();"></i></td>
+							<td><div id="emailMsg">이메일 입력 후 버튼을 눌러주세요.</div></td>
 						</tr>
 						<tr>
 							<td>주소</td>
@@ -94,11 +114,6 @@
 							<td><i id="getAdd" class="fa fa-map-marker"></i></td>
 							<td><span>주소 입력을 위해 버튼을 눌러주세요.</span></td>
 						</tr>
-						
-						<tr>
-							<td colspan="4"></td>
-						<tr>
-						<br>
 						<tr>
 							<td>생년월일</td>
 							<td><input type="date" name="birth" id="birth" style="width:210px;"></td>
@@ -114,24 +129,30 @@
 								<input type="radio" id="male" name="gender" value="male">
 								<label for="male">남</label>
 							</td>
-							<td colspan="2"></td>
+							<td>
+							
+							</td>
+							<td>
+								<div id="radioMsg"></div>
+							</td>
+						</tr>
+						<tr>
+							
+							<td colspan="4"><input id="submitJoin" type="submit" value="가입">
+							<input id="resetJoin" type="reset" value="취소"></td>
+							
 						</tr>
 					</table>
-					
-			
-					
-		
-					
 				</div>
 				
 				
 			</form>
+		</div>
 		<form action="" name="emailCheck">
 		<!--form이나 queryString으로 넘기는 방법있음.-->
 		<!-- 아이디에 입력한 값을 여기에 몰래 집어넣고 전송 -->
 			<input type="hidden" name="Email">
 		</form>
-		</div>
 	</section>
 	
 	<script>
@@ -240,6 +261,18 @@
 			//form 전송하기
 			emailCheck.submit();
 		}
+		
+		jQuery(document).ready(function(){
+			$('input:radio[value="none"]').click(function(){
+				$("#radioMsg").html("모임 참여에 제약이 있을 수 있습니다.");
+			});
+			$('input:radio[value="female"]').click(function(){
+				$("#radioMsg").html("");
+			});
+			$('input:radio[value="male"]').click(function(){
+				$("#radioMsg").html("");
+			});
+		})
 	</script>
 </body>
 </html>
