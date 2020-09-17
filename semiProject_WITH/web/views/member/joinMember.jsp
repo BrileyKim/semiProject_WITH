@@ -7,14 +7,14 @@
 <title>Insert title here</title>
 <style>
 	#join-div{
-		margin:40px auto;
+		margin:auto auto;
 		text-align:center;
 		width:700px;
 	}
 	#join-table-essential{
 		margin: 40px 0;
 		border-spacing: 10px 10px;
-		text-align:center;
+		text-align:left;
 		float:left;
 	}
 	#join-table-optional{
@@ -35,13 +35,15 @@
 		<div id="joinBox">
 		<!-- Have to put method and enctype if you want to let client put profile photo -->
 			<form action="<%=request.getContextPath()%>/joinMemberEnd" method="post"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" name="memberJoinFrm">
 				<div id="join-div">
 					<table id="join-table-essential">
 						<tr>
 							<td>아이디</td>
 							<td><input type="text" placeholder="4글자이상" name="Id" id="Id" required ></td>
-							<td><div id="chkMsg"></div></td>
+							<td colspan="2">
+								<div id="chkMsg"></div>
+							</td>
 						</tr>
 						<tr>
 							<td>비밀번호</td>
@@ -51,11 +53,14 @@
                         			<i id="eyeOn" class="fas fa-eye" style="color:gray;"></i>
                     			</div>
                     		</td>
+                    		<td>
+                    			<div id="chkPwRule"></div>
+                    		</td>
 						</tr>
 						<tr>
 							<td>비밀번호 확인</td>
 							<td><input type="password" id="Password2" class="inputPw"></td>
-							<td>
+							<td colspan="2">
 								<div id="chkPw">
 									<i id="showchk" class="fas fa-check" style="color:gray;"></i>
 								</div>
@@ -66,37 +71,36 @@
 							<td>
 								<input type="text" name="nickname" id="nickname" placeholder="반려견 이름을 포함시켜주세요." required>
 							</td>
-							<td></td>
+							<td colspan="2"></td>
 						</tr>
 						<tr>
 							<td>전화번호</td>
 							<td><input type="text" name="phone" id="phone"></td>
-							<td></td>
+							<td colspan="2"></td>
 						</tr>
 						<tr>
 							<td>이메일</td>
 							<td><input type=text id="email" name="email"></td>
 							<td><i class="fa fa-envelope" onclick="fn_email_check();"></i></td>
+							<td><span id="emailMsg">이메일 입력 후 버튼을 눌러주세요.</span></td>
 						</tr>
 						<tr>
 							<td>주소</td>
-							<td><input type="text" id="si" name="si" class="add">
-								<input type="text" id="gu" name="gu" class="add"> 
-								<input type="text" id="dong" name="dong" class="add"></td>
+							<td><input type="text" id="si" name="si" class="add" readonly>
+								<input type="text" id="gu" name="gu" class="add" readonly> 
+								<input type="text" id="dong" name="dong" class="add" readonly></td>
 							<td><i id="getAdd" class="fa fa-map-marker"></i></td>
+							<td><span>주소 입력을 위해 버튼을 눌러주세요.</span></td>
 						</tr>
 						
-					</table>
-					
-					<table id="join-table-optional">
 						<tr>
-							<td colspan="3"></td>
+							<td colspan="4"></td>
 						<tr>
 						<br>
 						<tr>
 							<td>생년월일</td>
 							<td><input type="date" name="birth" id="birth" style="width:210px;"></td>
-							<td></td>
+							<td colspan="2"></td>
 						</tr>
 						<tr>
 							<td>성별</td>
@@ -108,9 +112,13 @@
 								<input type="radio" id="male" name="gender" value="male">
 								<label for="male">남</label>
 							</td>
+							<td colspan="2"></td>
 						</tr>
-					
 					</table>
+					
+			
+					
+		
 					
 				</div>
 				
@@ -139,6 +147,15 @@
 					}
 				});
             });
+            
+   	    	$("#Password").blur(e=>{
+   	    		let pw=$(e.target).val();
+   	    		let regPw = /(?=.*\d{1,16})(?=.*[~`!@#$%\^&*()-+=]{1,16})(?=.*[a-zA-Z]{1,16}).{8,16}$/;
+   	    		if(!regPw.test(pw)){
+   	    			$("#chkPwRule").html("영문자, 숫자 ,특수기호 포함하여 8~16자");
+   	    			$(e.target).val("");
+   	    		}
+   	    	})
             
 			$(".inputPw").keyup(function(){
 				var inputed = $("#Password").val();

@@ -36,6 +36,7 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 		
 			Member m = new MemberService().checkIdDuplicate(id);
 			request.setAttribute("result", m);
+			request.setAttribute("sendedId", id);
 			request.getRequestDispatcher("/views/member/checkIdDuplicate.jsp").forward(request, response);		
 	}
 
