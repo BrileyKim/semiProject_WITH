@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Servlet Filter implementation class EncryptorFilter
  */
-@WebFilter(servletNames = { "joinMember","login","updatePassword"})
+@WebFilter(servletNames = { "joinMember"})
 public class EncryptorFilter implements Filter {
 
     /**
@@ -34,9 +34,8 @@ public class EncryptorFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// place your code here
 		EncryptorWrapper ew = new EncryptorWrapper((HttpServletRequest)request);
-		
 		// pass the request along the filter chain
-		chain.doFilter(request, response);
+		chain.doFilter(ew, response);
 	}
 
 	/**

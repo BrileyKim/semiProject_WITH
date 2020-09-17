@@ -31,7 +31,6 @@ public class MemberJoinEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member m = new Member();
-		System.out.println(request.getParameter("Id"));
 		m.setId(request.getParameter("Id"));
 		m.setPassword(request.getParameter("Password"));
 		m.setNickname(request.getParameter("nickname"));
