@@ -76,12 +76,12 @@
 						<tr>
 							<td>이메일</td>
 							<td><input type=text id="email" name="email"></td>
-							<td></td>
+							<td><i class="fa fa-envelope" onclick="fn_email_check();"></i></td>
 						</tr>
 						<tr>
 							<td>주소</td>
 							<td><input type="text" id="si" name="si" class="add">
-								<input type="text id="gu" name="gu" class="add"> 
+								<input type="text" id="gu" name="gu" class="add"> 
 								<input type="text" id="dong" name="dong" class="add"></td>
 							<td><i id="getAdd" class="fa fa-map-marker"></i></td>
 						</tr>
@@ -116,6 +116,11 @@
 				
 				
 			</form>
+		<form action="" name="emailCheck">
+		<!--form이나 queryString으로 넘기는 방법있음.-->
+		<!-- 아이디에 입력한 값을 여기에 몰래 집어넣고 전송 -->
+			<input type="hidden" name="Email">
+		</form>
 		</div>
 	</section>
 	<script>
@@ -173,21 +178,33 @@
 							gu = data.sigungu;
 							dong = data.bname;
 						// if client selected jibunAddress
-						}else{
+						}else if(data.userSelectedType=='J'){
 							si = data.sido;
 							gu = data.sigungu;
 							dong = data.bname;
 						}
-						
 						document.getElementById("si").value=si;
 						document.getElementById("gu").value=gu;
 						document.getElementById("dong").value=dong;
-
 			        }
 			    }).open();
 			});
 		})
 
+		function fn_email_check(){
+			let email = $("#email").val().trim();
+			const url = "<%=request.getContextPath()%>/emailCheck";
+			const title="emailCheck";
+			const status="left=500px,top=100px,width=300px,height=200px";
+			open("",title,status);
+			
+			emailCheck.target=title;
+			emailCheck.action=url;
+			emailCheck.method="post";
+			emailCheck.Email.value=email;
+			//form 전송하기
+			emailCheck.submit();
+		}
 	</script>
 </body>
 </html>
