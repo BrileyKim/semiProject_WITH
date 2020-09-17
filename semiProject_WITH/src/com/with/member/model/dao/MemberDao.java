@@ -48,5 +48,31 @@ public class MemberDao {
 		}
 		return m;
 	}
+	
+	public Member checkNickname(Connection conn, String nickname) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("checkNickname"));
+			pstmt.setNString(1, nickname);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setId(rs.getString("id"));
+				m.setPassword(rs.getString("password"));
+				m.setNickname(rs.getString("nickname"));
+				m.setGrade(rs.getString("gender"));
+				m.setBirth(rs.getString("birth"));
+				m.setPhone(rs.getString("phone"));
+				m.setEmail(rs.getString("email"));
+				m.setAddress(rs.getString("address"));
+				m.setEnrolldate(rs.getDate("enrolldate"));	
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return m;
+	}
 
 }

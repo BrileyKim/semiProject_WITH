@@ -71,7 +71,9 @@
 							<td>
 								<input type="text" name="nickname" id="nickname" placeholder="반려견 이름을 포함시켜주세요." required>
 							</td>
-							<td colspan="2"></td>
+							<td colspan="2">
+								<div id="chkNickMsg"></div>
+							</td>
 						</tr>
 						<tr>
 							<td>전화번호</td>
@@ -131,6 +133,7 @@
 		</form>
 		</div>
 	</section>
+	
 	<script>
 		$(function(){
 			var newValue;
@@ -147,6 +150,21 @@
 					}
 				});
             });
+            
+            $("#nickname").on("propertychange change keyup paste input", function() {
+                newValue = $(this).val();
+ 				$.ajax({
+ 					url:"<%=request.getContextPath()%>/checkNickname",
+ 					type:"get",
+ 					data:{"nickname":newValue},
+ 					dataType:"html",
+ 					success:data=>{
+ 						console.log(data);
+ 						$("#chkNickMsg").html(data);
+ 					}
+ 				});
+             });
+            
             
    	    	$("#Password").blur(e=>{
    	    		let pw=$(e.target).val();
