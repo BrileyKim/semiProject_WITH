@@ -53,8 +53,7 @@
 		<%@ include file="/views/common/sidebar.jsp" %>
 		<div id="joinBox">
 		<!-- Have to put method and enctype if you want to let client put profile photo -->
-			<form action="<%=request.getContextPath()%>/joinMemberEnd" method="post"
-			enctype="multipart/form-data" name="memberJoinFrm">
+			<form action="<%=request.getContextPath()%>/joinMemberEnd" method="post" name="memberJoinFrm">
 				<div id="join-div">
 					<table id="join-table-essential">
 						<tr>
@@ -122,11 +121,11 @@
 						<tr>
 							<td>성별</td>
 							<td>
-								<input type="radio" id="none" name="gender" value="none">
+								<input type="radio" id="none" name="gender" value="N">
 								<label for="none">공개안함</label>
-								<input type="radio" id="female" name="gender" value="female">
+								<input type="radio" id="female" name="gender" value="F">
 								<label for="female">여</label>
-								<input type="radio" id="male" name="gender" value="male">
+								<input type="radio" id="male" name="gender" value="M">
 								<label for="male">남</label>
 							</td>
 							<td>
@@ -263,13 +262,13 @@
 		}
 		
 		jQuery(document).ready(function(){
-			$('input:radio[value="none"]').click(function(){
+			$('input:radio[value="N"]').click(function(){
 				$("#radioMsg").html("모임 참여에 제약이 있을 수 있습니다.");
 			});
-			$('input:radio[value="female"]').click(function(){
+			$('input:radio[value="F"]').click(function(){
 				$("#radioMsg").html("");
 			});
-			$('input:radio[value="male"]').click(function(){
+			$('input:radio[value="M"]').click(function(){
 				$("#radioMsg").html("");
 			});
 		})
