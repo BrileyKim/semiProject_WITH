@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#join-essential{
+	#join-div{
 		margin:40px auto;
 		text-align:center;
 		width:700px;
@@ -22,8 +22,11 @@
 		border-spacing: 10px 10px;
 		
 	}
-	
+	.add{
+		width:60px;
+	}
 </style>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 	<%@ include file="/views/common/header.jsp" %>
@@ -33,7 +36,7 @@
 		<!-- Have to put method and enctype if you want to let client put profile photo -->
 			<form action="<%=request.getContextPath()%>/joinMemberEnd" method="post"
 			enctype="multipart/form-data">
-				<div id="join-essential">
+				<div id="join-div">
 					<table id="join-table-essential">
 						<tr>
 							<td>아이디</td>
@@ -65,6 +68,24 @@
 							</td>
 							<td></td>
 						</tr>
+						<tr>
+							<td>전화번호</td>
+							<td><input type="text" name="phone" id="phone"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>이메일</td>
+							<td><input type=text id="email" name="email"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>주소</td>
+							<td><input type="text" id="si" name="si" class="add">
+								<input type="text id="gu" name="gu" class="add"> 
+								<input type="text" id="dong" name="dong" class="add"></td>
+							<td><i id="getAdd" class="fa fa-map-marker"></i></td>
+						</tr>
+						
 					</table>
 					
 					<table id="join-table-optional">
@@ -140,7 +161,31 @@
 				}
 			})
 			
-            
+			$("#getAdd").click(function(){
+			    new daum.Postcode({
+			        oncomplete: function(data) {
+						var si='';
+						var gu='';
+						var dong='';
+						//if client selected roadAddress
+						if(data.userSelectedType == 'R'){
+							si = data.sido;
+							gu = data.sigungu;
+							dong = data.bname;
+						// if client selected jibunAddress
+						}else{
+							si = data.sido;
+							gu = data.sigungu;
+							dong = data.bname;
+						}
+						
+						document.getElementById("si").value=si;
+						document.getElementById("gu").value=gu;
+						document.getElementById("dong").value=dong;
+
+			        }
+			    }).open();
+			});
 		})
 
 	</script>
