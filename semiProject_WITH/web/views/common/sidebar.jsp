@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="com.with.member.model.vo.Member" %>
+<%
+	Member logginedMember = (Member)(session.getAttribute("logginedMember"));
+%>
 <!-- Bring font awesome to use  search icon-->
 <script src="https://kit.fontawesome.com/d41f04266a.js" crossorigin="anonymous"></script>
 <!-- Apply sidebar.css to sidebar.jsp 
@@ -51,16 +54,20 @@
 <div class="side-bar">
 	<!-- Create logo, search, login, mypage a tag 
 		Use br tag for spacing easily -->
-	<a href="#home" class="logo">www.WITH.com</a>
+	<a href="<%=request.getContextPath()%>" class="logo">www.WITH.com</a>
 	<br>
 	<br>
 	<a href="#search" class="search"><i class="fas fa-search"></i></a>
 	<br>
 	<br>
+	<% if(logginedMember==null) {%>
 	<a href="#login" class="login">Login</a>
+	<%}else{ %>
+	<a href="<%=request.getContextPath()%>/logout" class="login">Logout</a>
 	<br>
 	<br>
-	<a href="#mypage" class="mypage">My Page</a>
+	<a href="<%=request.getContextPath()%>/myPage?id=<%=logginedMember.getId()%>" class="mypage">My Page</a>
+	<%} %>
 </div>
 
 <script>

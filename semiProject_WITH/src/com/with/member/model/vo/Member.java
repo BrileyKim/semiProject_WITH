@@ -12,6 +12,7 @@ public class Member {
 	private String phone;
 	private String email;
 	private String address;
+	private String profile;
 	private Date enrolldate;
 	
 	public Member() {
@@ -19,7 +20,7 @@ public class Member {
 	}
 
 	public Member(String id, String password, String nickname, String grade, String gender, String birth, String phone,
-			String email, String address, Date enrolldate) {
+			String email, String address, String profile, Date enrolldate) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -30,6 +31,7 @@ public class Member {
 		this.phone = phone;
 		this.email = email;
 		this.address = address;
+		this.profile = profile;
 		this.enrolldate = enrolldate;
 	}
 
@@ -105,6 +107,14 @@ public class Member {
 		this.address = address;
 	}
 
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
 	public Date getEnrolldate() {
 		return enrolldate;
 	}
@@ -117,8 +127,9 @@ public class Member {
 	public String toString() {
 		return "Member [id=" + id + ", password=" + password + ", nickname=" + nickname + ", grade=" + grade
 				+ ", gender=" + gender + ", birth=" + birth + ", phone=" + phone + ", email=" + email + ", address="
-				+ address + ", enrolldate=" + enrolldate + "]";
+				+ address + ", profile=" + profile + ", enrolldate=" + enrolldate + "]";
 	}
+
 	
 	
 }

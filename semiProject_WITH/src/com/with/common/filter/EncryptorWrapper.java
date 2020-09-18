@@ -22,7 +22,7 @@ public class EncryptorWrapper extends HttpServletRequestWrapper {
 		// should check both password and Password
 		// can find password at sidebar.jsp
 		// and Password at joinMember.jsp
-		if(name.equals("Password")||name.equals("passowrd")) {
+		if(name.equals("Password")||name.equals("password")) {
 			// encrypt and send
 			String pw = super.getParameter(name);
 			String encPw=getSha512(pw);

@@ -4,6 +4,7 @@ import static com.with.common.JDBCTemplate.close;
 import static com.with.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import com.with.member.model.dao.MemberDao;
 import com.with.member.model.vo.Member;
@@ -33,5 +34,16 @@ public class MemberService {
 		if(result>0) commit(conn);
 		else rollback(conn);
 		return result;
+	}
+	
+	public Member loginMember(String id, String password) {
+		Connection conn = getConnection();
+		Member m = dao.loginMember(conn,id,password);
+		try {
+			if(conn!=null) conn.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return m;
 	}
 }

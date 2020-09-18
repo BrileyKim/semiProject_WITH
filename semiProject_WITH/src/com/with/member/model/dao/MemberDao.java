@@ -37,11 +37,13 @@ public class MemberDao {
 				m.setId(rs.getString("id"));
 				m.setPassword(rs.getString("password"));
 				m.setNickname(rs.getString("nickname"));
-				m.setGrade(rs.getString("gender"));
+				m.setGrade(rs.getString("grade"));
+				m.setGender(rs.getString("gender"));
 				m.setBirth(rs.getString("birth"));
 				m.setPhone(rs.getString("phone"));
 				m.setEmail(rs.getString("email"));
 				m.setAddress(rs.getString("address"));
+				m.setProfile(rs.getString("profile"));
 				m.setEnrolldate(rs.getDate("enrolldate"));		
 			}
 		}catch(SQLException e) {
@@ -66,11 +68,13 @@ public class MemberDao {
 				m.setId(rs.getString("id"));
 				m.setPassword(rs.getString("password"));
 				m.setNickname(rs.getString("nickname"));
-				m.setGrade(rs.getString("gender"));
+				m.setGrade(rs.getString("grade"));
+				m.setGender(rs.getString("gender"));
 				m.setBirth(rs.getString("birth"));
 				m.setPhone(rs.getString("phone"));
 				m.setEmail(rs.getString("email"));
 				m.setAddress(rs.getString("address"));
+				m.setProfile(rs.getString("profile"));
 				m.setEnrolldate(rs.getDate("enrolldate"));	
 			}
 		}catch(SQLException e) {
@@ -102,6 +106,38 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public Member loginMember(Connection conn, String id, String password) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("selectMemberone"));
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setId(rs.getString("id"));
+				m.setPassword(rs.getString("password"));
+				m.setNickname(rs.getString("nickname"));
+				m.setGrade(rs.getString("grade"));
+				m.setGender(rs.getString("gender"));
+				m.setBirth(rs.getString("birth"));
+				m.setPhone(rs.getString("phone"));
+				m.setEmail(rs.getString("email"));
+				m.setAddress(rs.getString("address"));
+				m.setAddress(rs.getString("profile"));
+				m.setEnrolldate(rs.getDate("enrolldate"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
 	}
 
 }
