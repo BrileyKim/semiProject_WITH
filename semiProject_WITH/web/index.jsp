@@ -7,7 +7,7 @@
 <title>Walk WITH me</title>
 <style>
 <%--body{background-image:url("<%=request.getContextPath()%>/img/back.jpg");background-position:center;background-repeat: no-repeat;background-size: cover;min-height:590px;}--%>    
-body::-webkit-scrollbar{display:none;}
+	body::-webkit-scrollbar{display:none;}
 </style>
 </head>
 <body>

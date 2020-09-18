@@ -17,7 +17,7 @@
 		padding-right:10px;
 		padding-left:10px;
 		border-spacing: 10px 10px;
-		text-align:center;
+		text-align:left;
 		float:left;
 		background-color:rgba(250,247,242,0.7);
 		border-radius:2px;
@@ -26,6 +26,7 @@
 		width:60px;
 	}
 	#submitJoin{
+		margin-left:110px;
 		margin-right:10px;
 		margin-top:10px;
 		margin-bottom:10px;
@@ -36,7 +37,7 @@
 		background-color:rgba(114,133,63,0.9);
 	}
 	#resetJoin{
-	margin-top:10px;
+		margin-top:10px;
 		font-size:16px;
 		margin-bottom:10px;
 		border-radius:2px;
@@ -136,10 +137,10 @@
 							</td>
 						</tr>
 						<tr>
-							
-							<td colspan="4"><input id="submitJoin" type="submit" value="가입">
+							<td></td>
+							<td colspan="2"><input id="submitJoin" type="submit" value="가입">
 							<input id="resetJoin" type="reset" value="취소"></td>
-							
+							<td></td>
 						</tr>
 					</table>
 				</div>

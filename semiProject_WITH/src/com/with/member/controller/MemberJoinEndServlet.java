@@ -34,7 +34,11 @@ public class MemberJoinEndServlet extends HttpServlet {
 		m.setId(request.getParameter("Id"));
 		m.setPassword(request.getParameter("Password"));
 		m.setNickname(request.getParameter("nickname"));
-		m.setGender(request.getParameter("gender"));
+		try {
+			m.setGender(request.getParameter("gender"));			
+		}catch(NullPointerException e) {
+			m.setGender("N");
+		}
 		m.setBirth(request.getParameter("birth"));
 		
 		String phone = request.getParameter("phone");
@@ -50,7 +54,6 @@ public class MemberJoinEndServlet extends HttpServlet {
 		String gu = request.getParameter("gu");
 		String dong = request.getParameter("dong");
 		m.setAddress(si+","+gu+","+dong);
-		System.out.println(m);
 		
 		int result = new MemberService().insertMember(m);
 		
