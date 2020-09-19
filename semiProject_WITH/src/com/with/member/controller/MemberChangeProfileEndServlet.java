@@ -49,8 +49,18 @@ public class MemberChangeProfileEndServlet extends HttpServlet {
 		String file = mr.getFilesystemName("upProfile");
 		String id = mr.getParameter("id");
 		int result = new MemberService().profileUpdate(id,file);
-		
-		
+		String msg="";
+		String loc="";
+		if(result>0) {
+			msg="프로필 사진이 정상적으로 변경되었습니다.";
+		}else {
+			msg="프로필 사진 변경에 실패했습니다.";
+			loc="/myPage";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.setAttribute("script", "self.close();");
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	
 	}
 
