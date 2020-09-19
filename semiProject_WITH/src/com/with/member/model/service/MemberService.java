@@ -46,4 +46,13 @@ public class MemberService {
 		}
 		return m;
 	}
+	
+	public int profileUpdate(String id, String file) {
+		Connection conn = getConnection();
+		int result = dao.profileUpdate(conn,id,file);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+		
+	}
 }

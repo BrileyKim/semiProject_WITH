@@ -139,5 +139,21 @@ public class MemberDao {
 		}
 		return m;
 	}
+	
+	public int profileUpdate(Connection conn, String id, String file) {
+		PreparedStatement pstmt = null;
+		int result =0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("updateProfile"));
+			pstmt.setString(1, file);
+			pstmt.setString(2, id);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }
