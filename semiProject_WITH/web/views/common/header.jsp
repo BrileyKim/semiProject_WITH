@@ -8,7 +8,6 @@
 <header>
 	<div class="header">
 		<div class="header-left">
-			<a class="active" href="#walk">Walk</a>
 			<a class="active" href="#meet">Meet</a>
 			<a class="active" href="#notice">Notice</a>
 			<a class="active" href="#qanda">Q & A</a>

@@ -14,7 +14,7 @@
 
 /* Apply css to a tags in the side-bar*/
 /* Starts with remove underline */
-a.logo, a.search, a.login, a.mypage{
+a.logo, .search, a.login, a.mypage{
 	text-decoration:none
 }
 /* Change logo a tag writing mode vertically*/
@@ -24,7 +24,7 @@ a.logo{
 	color:black;
 }
 /* font-weight:lighter makes font thiner */
-a.search{
+.search{
 	font-size:21px;
 	font-weight:lighter;
 	color:black;

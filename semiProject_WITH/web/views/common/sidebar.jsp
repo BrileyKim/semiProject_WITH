@@ -22,6 +22,58 @@
 	left:65px;
 	top:0px;
 }
+#searchSlide{
+	height:100%;
+	width:0;
+	position:fixed;
+	z-index:1;
+	top:0;
+	right:0;
+	background-color:rgba(114,133,63,0.8);
+	overflow-x:hidden;
+	transition:0.5s;
+	padding-top:60px;
+}
+#searchSlide a{
+	padding: 8px 8px 8px 34px;
+	text-decoration: none;
+	font-size:12px;
+	color:rgba(0,0,0,0.5);
+	display:block;
+	transition:0.3s;
+}
+#searchSlide a:hover{
+	color:#f1f1f1;
+}
+#searchSlide .closebtn{
+	position:absolute;
+	top:0;
+	right:25px;
+	font-size:36px;
+	margin-left:50px;
+}
+@media screen and (max-height: 450px){
+	#searchSlide {padding-top:15px;}
+	#searchSlide a {font-size : 18px;}
+}
+#search-Opt{
+	margin-left:15px;
+	font-size:15px;
+}
+#searchText{
+ width:170px;
+ font-size:15px;
+ margin-left:15px;
+ margin-top:10px;
+}
+#searchSubmit{
+	font-size:15px;
+	background-color:rgba(250,247,242,0.8);
+	border:1px solid rgb(250,247,242,0.8);
+	position:absolute;
+	right:30px;
+	top:95px;
+}
 </style>
 <!-- Create login box -->
 <div id="loginBox">
@@ -50,6 +102,20 @@
 	</form>
 </div>
 
+<div id="searchSlide">
+	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	        <form>
+	            <select name="search-Opt" id="search-Opt">
+	                <option value="0">모임</option>
+	                <option value="1">사용자</option>
+	                <option value="2">산책</option>
+	            </select>
+	            <br>
+	            <input type="text" size="20" name="searchText" id="searchText">&nbsp;
+	            <input type="submit" value="검색" id="searchSubmit">
+	        </form> 
+</div>
+
 <!-- Create side-bar div tag -->
 <div class="side-bar">
 	<!-- Create logo, search, login, mypage a tag 
@@ -57,7 +123,15 @@
 	<a href="<%=request.getContextPath()%>" class="logo">www.WITH.com</a>
 	<br>
 	<br>
-	<a href="#search" class="search"><i class="fas fa-search"></i></a>
+	<span class="search" onclick="openNav();"><i class="fas fa-search"></i></span>
+	<script>
+		function openNav(){
+			document.getElementById("searchSlide").style.width="280px";
+		}
+		function closeNav(){
+			document.getElementById("searchSlide").style.width="0";
+		}
+	</script>
 	<br>
 	<br>
 	<% if(logginedMember==null) {%>
