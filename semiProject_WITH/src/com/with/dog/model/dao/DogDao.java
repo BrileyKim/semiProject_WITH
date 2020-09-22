@@ -33,10 +33,11 @@ public class DogDao {
 			pstmt.setString(1, d.getDogOwner());
 			pstmt.setString(2, d.getDogName());
 			pstmt.setString(3, d.getDogGender());
-			pstmt.setString(4, d.getDogBreed());
-			pstmt.setString(5, d.getDogBirth());
-			pstmt.setString(6, d.getDogNeuter());
-			pstmt.setString(7, d.getDogProfile());
+			pstmt.setString(4, d.getDogBreed1());
+			pstmt.setString(5, d.getDogBreed2());
+			pstmt.setString(6, d.getDogBirth());
+			pstmt.setString(7, d.getDogNeuter());
+			pstmt.setString(8, d.getDogProfile());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -60,7 +61,8 @@ public class DogDao {
 				d.setDogOwner(rs.getString("dog_owner"));
 				d.setDogName(rs.getString("dog_name"));
 				d.setDogGender(rs.getString("dog_gender"));
-				d.setDogBreed(rs.getString("dog_breed"));
+				d.setDogBreed1(rs.getString("dog_breed1"));
+				d.setDogBreed2(rs.getString("dog_breed2"));
 				d.setDogBirth(rs.getString("dog_birth"));
 				d.setDogNeuter(rs.getString("dog_neuter"));
 				d.setDogStatus(rs.getString("dog_status"));

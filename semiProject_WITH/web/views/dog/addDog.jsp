@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add Dog</title>
+<title>내 강아지 정보입력</title>
 <style>
 	#addDogBox{
 		background-color:rgba(250,247,242,0.7);
 		border-radius:2px;
 		padding:20px;
-		width:610px;
-		height:310px;
+		width:620px;
+		height:330px;
 		margin:40px auto;
 	}
 	#addDog-photo{
@@ -21,16 +21,16 @@
 		float:left;
 		margin-top:20px;
 		margin-bottom :20px;
-		margin-left:40px;
+		margin-left:25px;
 		margin-right:20px;
 	}
 	#addDog-table{
 		border-spacing:5px 20px;
 		text-align:left;
-		margin-top:10px;
+		margin-top:0;
 	}
 	#submitAddDog{
-		margin-left:80px;
+		margin-left:250px;
 		font-size:16px;
 		margin-right:20px;
 		background-color:rgba(114,133,63,0.9);
@@ -45,7 +45,7 @@
 		border:1px gray solid;
 		width:60px;
 	}
-	#addDog-photo input[type="file"]{
+	#dogProfile{
 	    position: absolute;
 	    width: 0;
 	    height: 0;
@@ -53,7 +53,7 @@
 	    overflow: hidden;
 	    border: 0;
 	}
-	#addDog-photo label{
+	#dogProfileLbl{
 		vertical-align:middle;
 		text-align:center;
 	}
@@ -67,12 +67,18 @@
 		<div id="addDogBox">
 			<form action="<%=request.getContextPath()%>/addDogEnd" method="post" name="memberJoinFrm" enctype = "multipart/form-data">
 				<input type="hidden" name="dog_owner" value="<%=logginedMember.getId()%>">
+				
 				<div id="addDog-photo">
-					<label for="dogProfile" id="dogProfileLbl">대표 사진 선택</label>
-					<input type="file" id="dogProfile" name="dog_profile">
 				</div>
+				
 				<div id="addDog-div">
 					<table id="addDog-table">
+						<tr>
+							<td colspan="2">
+							<label for="dogProfile" id="dogProfileLbl">대표 사진 선택</label>
+							<input type="file" id="dogProfile" name="dog_profile">
+							</td>
+						</tr>
 						<tr>
 							<td>이름 </td>
 							<td> <input type="text" name="dog_name" id="dog_name" required></td>
@@ -160,7 +166,8 @@
 					fileTarget.on('change',function(){
 						
 						var lbl = $("#dogProfileLbl");
-						lbl.css('color','white');
+						lbl.html("대표 사진 변경");
+						
 <%-- 						var frm = document.getElementById("frm_profile_img");
 						frm.method='POST';
 						frm.enctype='multipart/form-data';
@@ -184,13 +191,11 @@
 								let reader=new FileReader();
 								reader.onload=function(e){
 									let img=$("<img>").attr({"src":e.target.result,"width":"250px","height":"190px"});
-									$("#addDog-photo").append(img);
+									$("#addDog-photo").html(img);
 								}
 								reader.readAsDataURL(this.files[i]);
 							}
 						}
-						var lbl = $("#dogProfileLbl");
-						lbl.value="";
 						// console.log(this.files);
 						// var cur=$("#addDog-photo input[type='file']").val();
 						// $("#dog_profile").val(cur);

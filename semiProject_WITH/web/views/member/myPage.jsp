@@ -4,6 +4,7 @@
 <%
 	
 		Dog d = (Dog)request.getAttribute("dog");
+System.out.println(d);
 
 %>
 <!DOCTYPE html>
@@ -233,7 +234,7 @@
 					</div>
 					<div class="status">
 						<div>
-							<input type="button" value="수정하기" onclick="fn_update_submit();"/>
+							<input type="button" value="상세보기" onclick="fn_update_submit();"/>
 						</div>
 						<div>
 							<input type="button" value="삭제하기" onclick="fn_delete_dog();"/>
@@ -243,7 +244,7 @@
 			</div>
 			<div class="general">
 				<h1><%=d.getDogName()%></h1>
-				<p>견종 : <%=d.getDogBreed() %></p>
+				<p>견종 : <%=d.getDogBreed2() %></p>
 				<p>생일 : <%=d.getDogBirth().substring(0, 10)%></p>
 				<p>중성화 : <%if(d.getDogNeuter().equals("Y")){%>
 							중성
@@ -267,11 +268,11 @@
 		}
 		
 		function fn_update_submit(){
-			location.replace('<%=request.getContextPath()%>/dog/updateDog?id=<%=logginedMember.getId()%>&dogIdx=<%=d.getDogIdx()%>');
+			location.replace('<%=request.getContextPath()%>/dog/updateDog?id=<%=logginedMember.getId()%>');
 		}
 		
 		function fn_delete_dog(){
-			location.replace('<%=request.getContextPath()%>/dog/deleteDog?id=<%=logginedMember.getId()%>&dogIdx=<%=d.getDogIdx()%>');
+			location.replace('<%=request.getContextPath()%>/dog/deleteDog?id=<%=logginedMember.getId()%>');
 		}
 	</script>
 </body>

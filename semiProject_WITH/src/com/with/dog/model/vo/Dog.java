@@ -6,7 +6,8 @@ public class Dog {
 	private String dogOwner;
 	private String dogName;
 	private String dogGender;
-	private String dogBreed;
+	private String dogBreed1;
+	private String dogBreed2;
 	private String dogBirth;
 	private String dogNeuter;
 	private String dogStatus;
@@ -16,14 +17,15 @@ public class Dog {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Dog(int dogIdx, String dogOwner, String dogName, String dogGender, String dogBreed, String dogBirth,
-			String dogNeuter, String dogStatus, String dogProfile) {
+	public Dog(int dogIdx, String dogOwner, String dogName, String dogGender, String dogBreed1, String dogBreed2,
+			String dogBirth, String dogNeuter, String dogStatus, String dogProfile) {
 		super();
 		this.dogIdx = dogIdx;
 		this.dogOwner = dogOwner;
 		this.dogName = dogName;
 		this.dogGender = dogGender;
-		this.dogBreed = dogBreed;
+		this.dogBreed1 = dogBreed1;
+		this.dogBreed2 = dogBreed2;
 		this.dogBirth = dogBirth;
 		this.dogNeuter = dogNeuter;
 		this.dogStatus = dogStatus;
@@ -62,12 +64,20 @@ public class Dog {
 		this.dogGender = dogGender;
 	}
 
-	public String getDogBreed() {
-		return dogBreed;
+	public String getDogBreed1() {
+		return dogBreed1;
 	}
 
-	public void setDogBreed(String dogBreed) {
-		this.dogBreed = dogBreed;
+	public void setDogBreed1(String dogBreed1) {
+		this.dogBreed1 = dogBreed1;
+	}
+
+	public String getDogBreed2() {
+		return dogBreed2;
+	}
+
+	public void setDogBreed2(String dogBreed2) {
+		this.dogBreed2 = dogBreed2;
 	}
 
 	public String getDogBirth() {
@@ -105,12 +115,9 @@ public class Dog {
 	@Override
 	public String toString() {
 		return "Dog [dogIdx=" + dogIdx + ", dogOwner=" + dogOwner + ", dogName=" + dogName + ", dogGender=" + dogGender
-				+ ", dogBreed=" + dogBreed + ", dogBirth=" + dogBirth + ", dogNeuter=" + dogNeuter + ", dogStatus="
-				+ dogStatus + ", dogProfile=" + dogProfile + "]";
+				+ ", dogBreed1=" + dogBreed1 + ", dogBreed2=" + dogBreed2 + ", dogBirth=" + dogBirth + ", dogNeuter="
+				+ dogNeuter + ", dogStatus=" + dogStatus + ", dogProfile=" + dogProfile + "]";
 	}
-	
-	
-	
 	
 
 }

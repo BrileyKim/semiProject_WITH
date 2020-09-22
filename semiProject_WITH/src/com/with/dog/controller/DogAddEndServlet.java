@@ -142,7 +142,8 @@ public class DogAddEndServlet extends HttpServlet {
 		d.setDogOwner(dogOwner);
 		d.setDogName(dogName);
 		d.setDogGender(dogGender);
-		d.setDogBreed(dogBreed2);
+		d.setDogBreed1(dogBreed1);
+		d.setDogBreed2(dogBreed2);
 		d.setDogBirth(dogBirth);
 		d.setDogNeuter(dogNeuter);
 		d.setDogProfile(dogProfile);

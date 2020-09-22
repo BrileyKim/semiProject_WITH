@@ -1,11 +1,16 @@
 package com.with.dog.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.with.dog.model.service.DogService;
+import com.with.dog.model.vo.Dog;
 
 /**
  * Servlet implementation class DogUpdateServlet
@@ -19,15 +24,19 @@ public class DogUpdateServlet extends HttpServlet {
      */
     public DogUpdateServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String id=request.getParameter("id");		
+		Dog d = new DogService().selectDogOne(id);
+		request.setAttribute("dog", d);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/views/dog/updateDog.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
