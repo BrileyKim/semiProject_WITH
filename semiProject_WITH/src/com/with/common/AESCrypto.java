@@ -28,6 +28,7 @@ public class AESCrypto {
 	
 	public AESCrypto() {
 		this.path=AESCrypto.class.getResource("/").getPath();
+		this.path=path.substring(0,path.indexOf("classes"));
 		File f = new File(this.path+"briley.br");
 		if(f.exists()) {
 			try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))){

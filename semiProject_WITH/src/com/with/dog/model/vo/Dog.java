@@ -10,13 +10,14 @@ public class Dog {
 	private String dogBirth;
 	private String dogNeuter;
 	private String dogStatus;
+	private String dogProfile;
 	
 	public Dog() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Dog(int dogIdx, String dogOwner, String dogName, String dogGender, String dogBreed, String dogBirth,
-			String dogNeuter, String dogStatus) {
+			String dogNeuter, String dogStatus, String dogProfile) {
 		super();
 		this.dogIdx = dogIdx;
 		this.dogOwner = dogOwner;
@@ -26,6 +27,7 @@ public class Dog {
 		this.dogBirth = dogBirth;
 		this.dogNeuter = dogNeuter;
 		this.dogStatus = dogStatus;
+		this.dogProfile = dogProfile;
 	}
 
 	public int getDogIdx() {
@@ -92,12 +94,22 @@ public class Dog {
 		this.dogStatus = dogStatus;
 	}
 
+	public String getDogProfile() {
+		return dogProfile;
+	}
+
+	public void setDogProfile(String dogProfile) {
+		this.dogProfile = dogProfile;
+	}
+
 	@Override
 	public String toString() {
 		return "Dog [dogIdx=" + dogIdx + ", dogOwner=" + dogOwner + ", dogName=" + dogName + ", dogGender=" + dogGender
 				+ ", dogBreed=" + dogBreed + ", dogBirth=" + dogBirth + ", dogNeuter=" + dogNeuter + ", dogStatus="
-				+ dogStatus + "]";
+				+ dogStatus + ", dogProfile=" + dogProfile + "]";
 	}
+	
+	
 	
 	
 

@@ -128,7 +128,7 @@ public class MemberDao {
 				m.setPhone(rs.getString("phone"));
 				m.setEmail(rs.getString("email"));
 				m.setAddress(rs.getString("address"));
-				m.setAddress(rs.getString("profile"));
+				m.setProfile(rs.getString("profile"));
 				m.setEnrolldate(rs.getDate("enrolldate"));
 			}
 		}catch(SQLException e) {

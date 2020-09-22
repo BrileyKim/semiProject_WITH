@@ -145,6 +145,7 @@ public class DogAddEndServlet extends HttpServlet {
 		d.setDogBreed(dogBreed2);
 		d.setDogBirth(dogBirth);
 		d.setDogNeuter(dogNeuter);
+		d.setDogProfile(dogProfile);
 		
 		int result = new DogService().insertDog(d);
 	
