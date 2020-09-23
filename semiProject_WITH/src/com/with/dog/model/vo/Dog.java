@@ -8,6 +8,7 @@ public class Dog {
 	private String dogGender;
 	private String dogBreed1;
 	private String dogBreed2;
+	private double dogWeight;
 	private String dogBirth;
 	private String dogNeuter;
 	private String dogStatus;
@@ -18,7 +19,7 @@ public class Dog {
 	}
 
 	public Dog(int dogIdx, String dogOwner, String dogName, String dogGender, String dogBreed1, String dogBreed2,
-			String dogBirth, String dogNeuter, String dogStatus, String dogProfile) {
+			double dogWeight, String dogBirth, String dogNeuter, String dogStatus, String dogProfile) {
 		super();
 		this.dogIdx = dogIdx;
 		this.dogOwner = dogOwner;
@@ -26,6 +27,7 @@ public class Dog {
 		this.dogGender = dogGender;
 		this.dogBreed1 = dogBreed1;
 		this.dogBreed2 = dogBreed2;
+		this.dogWeight = dogWeight;
 		this.dogBirth = dogBirth;
 		this.dogNeuter = dogNeuter;
 		this.dogStatus = dogStatus;
@@ -80,6 +82,14 @@ public class Dog {
 		this.dogBreed2 = dogBreed2;
 	}
 
+	public double getDogWeight() {
+		return dogWeight;
+	}
+
+	public void setDogWeight(double dogWeight) {
+		this.dogWeight = dogWeight;
+	}
+
 	public String getDogBirth() {
 		return dogBirth;
 	}
@@ -115,9 +125,11 @@ public class Dog {
 	@Override
 	public String toString() {
 		return "Dog [dogIdx=" + dogIdx + ", dogOwner=" + dogOwner + ", dogName=" + dogName + ", dogGender=" + dogGender
-				+ ", dogBreed1=" + dogBreed1 + ", dogBreed2=" + dogBreed2 + ", dogBirth=" + dogBirth + ", dogNeuter="
-				+ dogNeuter + ", dogStatus=" + dogStatus + ", dogProfile=" + dogProfile + "]";
+				+ ", dogBreed1=" + dogBreed1 + ", dogBreed2=" + dogBreed2 + ", dogWeight=" + dogWeight + ", dogBirth="
+				+ dogBirth + ", dogNeuter=" + dogNeuter + ", dogStatus=" + dogStatus + ", dogProfile=" + dogProfile
+				+ "]";
 	}
 	
-
+	
+	
 }

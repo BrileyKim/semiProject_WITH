@@ -16,16 +16,16 @@
 	}
 	#addDog-photo{
 		width:260px;
-		height:200px;
+		height:220px;
 		background-color:white;
 		float:left;
-		margin-top:20px;
+		margin-top:35px;
 		margin-bottom :20px;
 		margin-left:25px;
 		margin-right:20px;
 	}
 	#addDog-table{
-		border-spacing:5px 20px;
+		border-spacing:5px 15px;
 		text-align:left;
 		margin-top:0;
 	}
@@ -97,6 +97,12 @@
         								<option value="">중분류 선택</option>
     								</select>
 								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>몸무게 </td>
+							<td>
+								<input type="number" step="0.1" min="0" name="dog_weight">
 							</td>
 						</tr>
 						<tr>

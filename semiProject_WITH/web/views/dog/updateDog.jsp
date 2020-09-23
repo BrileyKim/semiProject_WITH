@@ -35,7 +35,7 @@
 	    border: 0;
 	}
 	#addDog-table{
-		border-spacing:5px 20px;
+		border-spacing:5px 15px;
 		text-align:left;
 		margin-top:0px;
 	}
@@ -63,16 +63,17 @@
 		<%@ include file="/views/common/sidebar.jsp" %>
 		<div id="updateDogBox">
 			<form action="<%=request.getContextPath()%>/dog/updateDogEnd" method="post" name="memberJoinFrm" enctype = "multipart/form-data">
+				<input type="hidden" name="dog_owner" value="<%=d.getDogOwner()%>"/>
 				<div id="addDog-photo">
 					<img src = '<%=request.getContextPath()%>/upload/dog/<%=d.getDogProfile()%>'
-					style="width:250px;height:190px;"/>
+					style="width:260px;height:200px;"/>
 				</div>
 				<div id="addDog-div">
 					<table id="addDog-table">
 						<tr>
 							<td colspan="2">
 								<label for="dogProfile" id="dogProfileLbl">대표 사진 변경</label>
-								<input type="file" id="dogProfile" name="dog_profile">
+								<input type="file" id="dogProfile" name="dog_profile" value="<%=d.getDogProfile()%>">
 							</td>
 						</tr>
 						<tr>
@@ -90,9 +91,15 @@
         								<option value="3" <%=d.getDogBreed1().equals("대형견")?"selected":""%> >대형견</option>
    						 			</select>
     								<select id="secondSelect" name="secondSelect" required>
-        								<option value=""><%=d.getDogBreed2()%></option>
+   
     								</select>
 								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>몸무게 </td>
+							<td>
+								<input type="number" value="<%=d.getDogWeight()%>" step="0.1" min="0" name="dog_weight">
 							</td>
 						</tr>
 						<tr>
@@ -144,21 +151,25 @@
 			if(sel==1){
 				$('.op').remove();
 				$.each(small,function(i,item){
-					$('#secondSelect').append($("<option>",{class:"op",value:i,text:item}));
+					$('#secondSelect').append($("<option>",{class:"op",
+															value:i,
+															text:item,
+															selected:item=='<%=d.getDogBreed2()%>'?true:false}));
 				});
 			}else if(sel==2){
 				$('.op').remove();
 				$.each(middle,function(i,item){
-					$('#secondSelect').append($("<option>",{class:"op",value:i,text:item}));
+					$('#secondSelect').append($("<option>",{class:"op",value:i,text:item,selected:item=='<%=d.getDogBreed2()%>'?true:false}));
 				});
 			}else if(sel==3){
 				$('.op').remove();
 				$.each(large,function(i,item){
-					$('#secondSelect').append($("<option>",{class:"op",value:i,text:item}));
+					$('#secondSelect').append($("<option>",{class:"op",value:i,text:item,selected:item=='<%=d.getDogBreed2()%>'?true:false}));
 				});
 			}
 			
 		});
+		$('#firstSelect').change();
 	});
 	$(document).ready(function(){
 		var fileTarget= $("#dogProfile");

@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.with.dog.model.vo.Dog" %>
-<%
-	
+<%	
 		Dog d = (Dog)request.getAttribute("dog");
-System.out.println(d);
-
 %>
 <!DOCTYPE html>
 <html>
@@ -229,7 +226,7 @@ System.out.println(d);
 					<!-- 강아지 사진 -->
 						
 						<img src="<%=request.getContextPath()%>/upload/dog/<%=d.getDogProfile()%>"
-						style="width:100px;height:100px;margin-left:10px; margin-top:45px;"/>
+						style="width:170px;height:120px;margin-left:50px; margin-top:10px;"/>
 						
 					</div>
 					<div class="status">

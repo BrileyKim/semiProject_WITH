@@ -1,9 +1,10 @@
 package com.with.dog.model.service;
 
+import static com.with.common.JDBCTemplate.close;
 import static com.with.common.JDBCTemplate.commit;
 import static com.with.common.JDBCTemplate.getConnection;
 import static com.with.common.JDBCTemplate.rollback;
-import static com.with.common.JDBCTemplate.close;
+
 import java.sql.Connection;
 
 import com.with.dog.model.dao.DogDao;
@@ -26,5 +27,14 @@ public class DogService {
 		Dog d = dao.selectDogOne(conn,id);
 		close(conn);
 		return d;
+	}
+	
+	public int updateDog(Dog d) {
+		Connection conn = getConnection();
+		int result = dao.updateDog(conn,d);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 }

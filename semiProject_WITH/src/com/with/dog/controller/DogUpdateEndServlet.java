@@ -16,16 +16,16 @@ import com.with.dog.model.service.DogService;
 import com.with.dog.model.vo.Dog;
 
 /**
- * Servlet implementation class DogAddEndServlet
+ * Servlet implementation class DogUpdateEndServlet
  */
-@WebServlet("/addDogEnd")
-public class DogAddEndServlet extends HttpServlet {
+@WebServlet("/dog/updateDogEnd")
+public class DogUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DogAddEndServlet() {
+    public DogUpdateEndServlet() {
         super();
     }
 
@@ -33,25 +33,23 @@ public class DogAddEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		if(!ServletFileUpload.isMultipartContent(request)) {
-			request.setAttribute("msg", "내 강아지 입력오류[form:enctype]관리자에게 문의하세요.");
+			request.setAttribute("msg", "내 강아지 수정오류[form:enctype]관리자에게 문의하세요.");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-		
 		String path = getServletContext().getRealPath("/")+"upload/dog";
 		int maxSize = 1024*1024*10;
 		String encode = "UTF-8";
 		
 		MultipartRequest mr = new MultipartRequest(request,path,maxSize,encode,new MyFileRename());
-
+		
 		String dogOwner = mr.getParameter("dog_owner");
 		String dogName = mr.getParameter("dog_name");
 		String dogProfile = mr.getFilesystemName("dog_profile");
-		String dogBreed1=null;
-		String dogBreed2=null;
+		String dogBreed1 = null;
+		String dogBreed2 = null;
 		if(mr.getParameter("firstSelect").equals("1")) {
 			dogBreed1 ="소형견";
 			if(mr.getParameter("secondSelect").equals("0")) {
@@ -129,16 +127,13 @@ public class DogAddEndServlet extends HttpServlet {
 			}else if(mr.getParameter("secondSelect").equals("11")) {
 				dogBreed2 = "기타";
 			}
-			
 		}
 		double dogWeight = Double.parseDouble(mr.getParameter("dog_weight"));
 		String dogGender = mr.getParameter("dog_gender");
 		String dogBirth = mr.getParameter("dog_birth");
 		String dogNeuter = mr.getParameter("dog_neuter");
 		
-		
 		Dog d = new Dog();
-		
 		d.setDogOwner(dogOwner);
 		d.setDogName(dogName);
 		d.setDogGender(dogGender);
@@ -149,21 +144,7 @@ public class DogAddEndServlet extends HttpServlet {
 		d.setDogNeuter(dogNeuter);
 		d.setDogProfile(dogProfile);
 		
-		int result = new DogService().insertDog(d);
-	
-		String msg = "";
-		String loc = "";
-		if(result>0) {
-			msg="내 강아지 등록 성공";
-			loc="/myPage";
-		}else {
-			msg="내 강아지 등록 실패";
-			loc="/views/member/myPage.jsp";
-		}		
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-
+		int result = new DogService().updateDog(d);
 		
 	}
 

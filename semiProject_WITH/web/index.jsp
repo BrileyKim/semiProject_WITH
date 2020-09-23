@@ -8,11 +8,16 @@
 <style>
 <%--body{background-image:url("<%=request.getContextPath()%>/img/back.jpg");background-position:center;background-repeat: no-repeat;background-size: cover;min-height:590px;}--%>    
 	body::-webkit-scrollbar{display:none;}
-	#mainBox-img{
-		width:700px;
-		height:440px;
+	#mainBox{
+		width:650px;
+		height:400px;
 		margin-left:100px;
 		margin-top:30px;
+		position:absolute;
+	}
+	#mainBox-img{
+		width:670px;
+		height:450px;
 	}
 </style>
 </head>
