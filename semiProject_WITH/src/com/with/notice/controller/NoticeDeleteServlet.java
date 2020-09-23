@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.with.notice.model.service.NoticeService;
-import com.with.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeUpdateServlet
+ * Servlet implementation class NoticeDeleteServlet
  */
-@WebServlet("/notice/noticeUpdate")
-public class NoticeUpdateServlet extends HttpServlet {
+@WebServlet("/notice/deleteNotice")
+public class NoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeUpdateServlet() {
+    public NoticeDeleteServlet() {
         super();
     }
 
@@ -29,21 +28,31 @@ public class NoticeUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int noticeIdx=Integer.parseInt(request.getParameter("noticeIdx"));
 		
-		Notice n=new NoticeService().selectNoticeOne(noticeIdx);
-	
-		request.setAttribute("notice", n);
+		int result=new NoticeService().deleteNotice(noticeIdx);
+		String msg="";
+		String loc="";
+		if(result>0) {
+			msg="글삭제 성공";
+			loc="/notice/noticeList";
+		}else {
+			msg="글삭제 실패";
+			loc="/notice/noticeView?noticeIdx="+noticeIdx;
+		}
 		
-		request.getRequestDispatcher("/views/notice/noticeUpdate.jsp")
-		.forward(request, response);
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp")
+		.forward(request, response);	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

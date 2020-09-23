@@ -19,7 +19,7 @@
 	 #tablediv{
 		background:rgba(114, 133, 63,0.95);
 	  	width:730px;
-	  	height:420px;
+	  	height:435px;
 	  	padding:20px;
 	  	margin:20px auto;
 	  	text-align:center;
@@ -92,7 +92,13 @@
 						              		<td colspan="2"   style="text-align: left; padding-top:20px; padding-left: 20px;">No.<%=n.getNoticeIdx() %></td>
 						           	 	</tr>
 						            	<tr>
-						              		<td colspan="2"   style="text-align: left; padding-top:30px; padding-left: 20px; font-size:20px"><%=n.getNoticeTitle() %></td>
+						              		<td colspan="2"   style="text-align: left; padding-top:30px; padding-left: 20px; font-size:20px">
+						              		<%if(n.getNoticeTitle().length()>8){ %>
+						              		<%=n.getNoticeTitle().substring(0,8) %>
+						              		<%}else{ %>
+						              		<%=n.getNoticeTitle()%>
+						              		<%} %>
+						              		</td>
 						            	</tr>
 						            	<tr>
 						              		<td style="text-align: left; padding-top:50px; padding-left: 20px;">

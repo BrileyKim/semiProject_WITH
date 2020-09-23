@@ -1,10 +1,13 @@
 package com.with.notice.model.service;
 
 import static com.with.common.JDBCTemplate.close;
-import static com.with.common.JDBCTemplate.getConnection;
 import static com.with.common.JDBCTemplate.commit;
+import static com.with.common.JDBCTemplate.getConnection;
 import static com.with.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.with.notice.model.dao.NoticeDao;
@@ -43,5 +46,25 @@ public class NoticeService {
 		close(conn);
 		return n;
 	}
+	
+	public int updateNotice(Notice n) {
+		Connection conn=getConnection();
+		int result=dao.updateNotice(conn,n);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteNotice(int noticeIdx) {
+		Connection conn=getConnection();
+		int result=dao.deleteNotice(conn,noticeIdx);
+		if(result>0) { commit(conn); }
+		else { rollback(conn); }
+		close(conn);
+		return result;
+	}
+	
+
 
 }

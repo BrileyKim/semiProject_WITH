@@ -158,6 +158,42 @@ public class NoticeDao {
 		}return n;
 	}
 	
+	public int updateNotice(Connection conn, Notice n) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateNotice"));
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeWriter());
+			pstmt.setString(3, n.getNoticeContent());
+			pstmt.setString(4, n.getNoticeOriginalFileName());
+			pstmt.setString(5, n.getNoticeRenamedFileName());
+			pstmt.setInt(6, n.getNoticeIdx());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+		
+		
+	}
+	
+	public int deleteNotice(Connection conn, int noticeIdx) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteNotice"));
+			pstmt.setInt(1, noticeIdx);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 
 }
