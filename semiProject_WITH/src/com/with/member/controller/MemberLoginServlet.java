@@ -43,7 +43,8 @@ public class MemberLoginServlet extends HttpServlet {
 			// Store loggined Member to data storing request object
 			HttpSession session = request.getSession();
 			session.setAttribute("logginedMember", m);
-			response.sendRedirect(request.getContextPath());
+			//Stay the page tha tyou login
+			response.sendRedirect(request.getHeader("Referer"));
 		}else {
 			request.setAttribute("msg", "아이디 혹은 비밀번호가 일치하지 않습니다.");
 			request.setAttribute("loc","/");

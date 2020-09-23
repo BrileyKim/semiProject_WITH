@@ -132,6 +132,32 @@ public class NoticeDao {
 		return result;
 	}
 	
+	public Notice selectNoticeOne(Connection conn, int noticeIdx) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Notice n=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectNoticeOne"));
+			pstmt.setInt(1, noticeIdx);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				n=new Notice();
+				n.setNoticeIdx(rs.getInt("notice_idx"));
+				n.setNoticeTitle(rs.getString("notice_title"));
+				n.setNoticeWriter(rs.getString("notice_writer"));
+				n.setNoticeContent(rs.getString("notice_content"));
+				n.setNoticeOriginalFileName(rs.getString("notice_originalfilepath"));;
+				n.setNoticeRenamedFileName(rs.getString("notice_renamedfilepath"));
+				n.setNoticeEnrollDate(rs.getDate("notice_enrolldate"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return n;
+	}
+	
 	
 
 }
