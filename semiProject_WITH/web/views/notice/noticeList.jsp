@@ -18,10 +18,10 @@
 	*:focus { outline:none; }
 	 #tablediv{
 		background:rgba(114, 133, 63,0.95);
-	  	width:630px;
-	  	height:410px;
+	  	width:730px;
+	  	height:420px;
 	  	padding:20px;
-	  	margin:30px auto;
+	  	margin:20px auto;
 	  	text-align:center;
 	} 
 	.card {
@@ -29,8 +29,8 @@
 		border-radius: 2px;
 		display: inline-block;
 		width: 180px;
-		height:225px;
-		margin: 1rem;
+		height:200px;
+		margin-bottom:20px;
 		position: relative;
 		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	    /* transition: all 0.1s cubic-bezier(.25,.8,.25,1); */
@@ -48,7 +48,7 @@
             text-align: center;
             display: inline-block;
             font-size: 16px;
-            margin: 3px;
+            
             cursor: pointer;
             border-radius:3px;
             font-weight: bold;
@@ -59,8 +59,8 @@
         background-color: rgb(199, 197, 197);
     }
     #backtable{
-    	width:630px;
-    	height:410px;
+    	width:730px;
+    	height:420px;
     	background-color:rgb(250, 247, 242);
     	padding:0;
     	margin:auto;
@@ -77,19 +77,14 @@
 			<table id="backtable">
 			<!-- 글씨 -->
 				<tr>
-					<td style="padding:0; height:100px;" colspan="5">
+					<td style="padding:0; height:100px;" colspan="3">
       				<p style="font-size:38px; margin-top:20px;">공지사항</p>
     				</td>
 				</tr>
-				<tr>
-					<td>
-				    	<br><br><br>
-				    </td>
-  				</tr>
   				  <!-- 게시물 -->
   				<tr>
 					<%for(Notice n : list) {%>
-				    	<td style="margin-top: 100px;">
+				    	<td style="margin-top: 20px;">
 				      		<div id="cardlist" style=""> 
 					        	<div class="card" onclick="location.href='<%=request.getContextPath() %>/notice/noticeView?noticeIdx=<%=n.getNoticeIdx()%>'" >		
 						          	<table style="width:180px;">
@@ -100,12 +95,12 @@
 						              		<td colspan="2"   style="text-align: left; padding-top:30px; padding-left: 20px; font-size:20px"><%=n.getNoticeTitle() %></td>
 						            	</tr>
 						            	<tr>
-						              		<td style="text-align: left; padding-top:90px; padding-left: 20px;">
+						              		<td style="text-align: left; padding-top:50px; padding-left: 20px;">
 												<%if(n.getNoticeOriginalFileName()!=null) {%>
 													<img src="<%=request.getContextPath() %>/img/clip.png" width="20" height="20"> 
 												<%} %>
 									  		</td>
-						              		<td style="text-align: right; padding-top:90px; padding-right: 20px;">
+						              		<td style="text-align: right; padding-top:50px; padding-right: 20px;">
 						              			<%=n.getNoticeEnrollDate() %>
 						              		</td>
 						            	</tr>
@@ -116,17 +111,8 @@
 				  <%} %>
 				  </tr>
 				  <tr>
-    			  	<td colspan="4">
-	      				<%if(logginedMember!=null && logginedMember.getId().equals("admin")){ %>
-	     				<button onclick="location.assign('<%=request.getContextPath()%>/notice/noticeWrite')" style="float:right; margin-top: 10px;" id="writebtn">글쓰기</button>
-	     				<%} %>
-    				</td>
-    				<td></td>
- 				  </tr>
- 				  <!-- 페이징 -->
- 				  <tr>
- 				  	<td colspan="5">
-						<div id="pageForm">
+    			  	<td colspan="3">
+    			  		<div id="pageForm">
 							<c:if test="${startPage!= 1}">
 				            	<a href='<%=request.getContextPath()%>/notice/noticeList?page=${startPage-1}'>[이전]</a>
 				        	</c:if>
@@ -143,10 +129,16 @@
 				            <a href='<%=request.getContextPath()%>/notice/noticeList?page=${endPage+1 }'>[다음]</a>
 				        	</c:if>
 						</div>
-					</td>
-				</tr>
+						
+	      				<%if(logginedMember!=null && logginedMember.getId().equals("admin")){ %>
+	     				<button onclick="location.assign('<%=request.getContextPath()%>/notice/noticeWrite')" style="float:right; margin-top: 0;" id="writebtn">글쓰기</button>
+	     				<%} %>
+						
+    				</td>
+
+ 				  </tr>
 				<tr>
-					<td colspan="5">
+					<td colspan="3">
 						<div id="searchForm">
 					        <form>
 					            <select name="opt">

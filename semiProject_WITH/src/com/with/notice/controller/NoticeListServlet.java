@@ -40,15 +40,15 @@ public class NoticeListServlet extends HttpServlet {
 		String opt = request.getParameter("opt");
 		String condition = request.getParameter("condition");
 		
-		List<Notice> list = new NoticeService().selectNoticeList(spage*5-4,opt,condition);
-		int listCount = new NoticeService().selectNoticeCount(spage*5-4,opt,condition);
+		List<Notice> list = new NoticeService().selectNoticeList(spage*3-2,opt,condition);
+		int listCount = new NoticeService().selectNoticeCount(spage*3-2,opt,condition);
 		
 		//the number of total Page
-		int maxPage = (int)(listCount/5.0+0.9);
+		int maxPage = (int)(listCount/3.0+0.9);
 		//start page number
-		int startPage = (int)(spage/5.0+0.8)*5-4;
+		int startPage = (int)(spage/3.0+0.8)*3-2;
 		//last page number
-		int endPage = startPage + 4;
+		int endPage = startPage + 2;
 		if(endPage>maxPage) endPage = maxPage;
 		
 		//store 4 number of page

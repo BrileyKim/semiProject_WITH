@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+
+*:focus { outline:none; }
+        body {
+			background-color:white;
+			margin: 0;
+			padding: 0;
+        }
+        #noticewritediv{
+	  	width:710px;
+	  	height:440px;
+	  	padding:20px;
+	  	margin:20px auto;
+		background-color:rgba(250,247,242,0.7);
+		}
+        .tableinput{
+            /* margin-top: 5%;
+            margin-left:20%; */
+			margin-left:80px;
+            width:500px;
+            position:fixed;
+        }
+        h3{
+            text-align: center;
+            margin-top: 1%;
+        }
+        textarea{
+            resize: none;
+            width:425px;
+            height: 190px;
+            font-size: 16px;
+        }
+        #noticetitle{
+            width:425px;
+            height: 30px;
+            font-size: 14px;
+        }
+        input::-webkit-input-placeholder { color: #EDA541;}
+        textarea::-webkit-input-placeholder { color: #EDA541;}
+        table {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+        
+        
+        
+        /* #inputdiv{
+            padding-top: 15%;
+            padding-left: 25%;
+            
+        } */
+        th{
+            width:250px;
+            text-align: left;
+            font-size:16px;
+        }
+        #enrollbtn {
+            width:130px;
+            height: 35px;
+            background-color: black;
+            border: none;
+            color:#fff;
+            text-align: center;
+            display: inline-block;
+            font-size: 17px;
+            margin: 4px;
+            cursor: pointer;
+            border-radius:10px;
+            font-weight: bold;
+            /* 
+            background: url( "<%=request.getContextPath()%>/img/btnenrollcheck.png" ) no-repeat black; */ 
+            background-position:3px center;
+        }
+        #enrollbtn:hover {
+            background-color: #EDA541;
+        }
+        #cancelbtn{
+            width:130px;
+            height: 35px;
+            color:black;
+            border: none;
+            text-align: center;
+            display: inline-block;
+            font-size: 17px;
+            margin: 4px;
+            cursor: pointer;
+            border-radius:10px;
+            font-weight: bold;
+            /* background: url( "img/btncancel.png" ) no-repeat rgb(236, 236, 236); */
+            background-position:3px center;
+        }
+        #cancelbtn:hover {
+            background-color: rgb(199, 197, 197);
+        }
+        #resetbtn{
+            width:90px;
+            height: 35px;
+            color:black;
+            border: none;
+            text-align: center;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px;
+            cursor: pointer;
+            border-radius:10px;
+            font-weight: bold;
+            /* background: url( "img/btnreset.png" ) no-repeat rgb(236, 236, 236); */
+            background-position:3px center;
+        }
+        #resetbtn:hover {
+            background-color: rgb(199, 197, 197);
+        }

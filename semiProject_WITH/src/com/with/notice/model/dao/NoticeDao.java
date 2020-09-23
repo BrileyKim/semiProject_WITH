@@ -35,28 +35,28 @@ public class NoticeDao {
 			if(opt==null) {
 				pstmt=conn.prepareStatement(prop.getProperty("selectNoticeListAll"));
 				pstmt.setInt(1, page);
-				pstmt.setInt(2, page+4);
+				pstmt.setInt(2, page+2);
 			}else if(opt.equals("0")) {
 				pstmt=conn.prepareStatement(prop.getProperty("selectNoticeListTitle"));
 				pstmt.setString(1, "%"+condition+"%");
 				pstmt.setInt(2, page);
-				pstmt.setInt(3, page+4);
+				pstmt.setInt(3, page+2);
 			}else if(opt.equals("1")) {
 				pstmt=conn.prepareStatement(prop.getProperty("selectNoticeListContent"));
 				pstmt.setString(1, "%"+condition+"%");
 				pstmt.setInt(2, page);
-				pstmt.setInt(3, page+4);
+				pstmt.setInt(3, page+2);
 			}else if(opt.equals("2")) {
 				pstmt=conn.prepareStatement(prop.getProperty("selectNoticeListTitleorContent"));
 				pstmt.setString(1, "%"+condition+"%");
 				pstmt.setString(2, "%"+condition+"%");
 				pstmt.setInt(3, page);
-				pstmt.setInt(4, page+4);
+				pstmt.setInt(4, page+2);
 			}else if(opt.equals("3")) {
 				pstmt=conn.prepareStatement(prop.getProperty("selectNoticeListWriter"));
 				pstmt.setString(1, "%"+condition+"%");
 				pstmt.setInt(2, page);
-				pstmt.setInt(3, page+4);
+				pstmt.setInt(3, page+2);
 			}
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
@@ -111,6 +111,25 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		return count;
+	}
+	
+	public int insertNotice(Connection conn, Notice n) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertNotice"));
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeWriter());
+			pstmt.setString(3, n.getNoticeContent());
+			pstmt.setString(4, n.getNoticeOriginalFileName());
+			pstmt.setString(5, n.getNoticeRenamedFileName());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	
