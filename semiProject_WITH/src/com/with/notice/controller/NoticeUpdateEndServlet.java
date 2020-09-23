@@ -42,11 +42,11 @@ public class NoticeUpdateEndServlet extends HttpServlet {
 		n.setNoticeTitle(mr.getParameter("notice_title"));
 		n.setNoticeWriter(mr.getParameter("notice_writer"));
 		n.setNoticeContent(mr.getParameter("notice_content"));
-		n.setNoticeOriginalFileName(mr.getOriginalFileName("fileView"));
-		n.setNoticeRenamedFileName(mr.getFilesystemName("fileView"));
+		System.out.println(mr.getOriginalFileName("fileview"));
+		n.setNoticeOriginalFileName(mr.getOriginalFileName("fileview"));
+		n.setNoticeRenamedFileName(mr.getFilesystemName("fileview"));
 		
 		int result=new NoticeService().updateNotice(n);
-		System.out.println(result);
 		String msg="";
 		String loc="/notice/noticeList";
 		if(result>0) {

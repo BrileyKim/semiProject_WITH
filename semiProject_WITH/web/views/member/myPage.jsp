@@ -13,8 +13,12 @@
 	.middle-container{
 		/* background-color:rgba(250,247,242,0.7); */
 		background-color:rgba(114,133,63,0.79);
-		margin:20px 20px;
-		width:290px;
+		margin-left:60px;
+		margin-top:20px;
+		margin-bottom:20px;
+		margin-right:40px;
+		width:350px;
+		height:390px;
 		border-radius:5px;
 		display:inline-block;
 	}
@@ -28,8 +32,8 @@
 	.profile-picture>img{
 		margin-top:25px;
 		border-radius:50%;
-		width:100px;
-		height:100px;
+		width:120px;
+		height:120px;
 	}
 	.user-name{
 		margin:25px 0 16px;
@@ -45,6 +49,8 @@
 		boder-radius:5px;
 		background-color:white;
 		border:1px solid rgba(250,247,242,0.7);
+		margin-right:15px;
+		margin-top:5px;
 	}
 	#upProfile{
 		margin:0;
@@ -56,8 +62,8 @@
 		height:80px;
 	}
 	.myPageDog-container{
-		width:450px;
-		height:250px;
+		width:500px;
+		height:320px;
 		background-color:#fff;
 		background: linear-gradient(#f8f8f8, #fff);
   		box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
@@ -157,6 +163,20 @@
 	  font-size: 0.9em;
 	}
 	
+	.meet-container{
+		width:1060px;
+		height:600px;
+		background-color:rgba(250,247,242,0.7);
+		margin:20px 55px;
+		border:1px solid black;
+	}
+		::-webkit-scrollbar{width: 15px;}
+	::-webkit-scrollbar-track {background-color:#f1f1f1;}
+	::-webkit-scrollbar-thumb {background-color:rgba(237,165,65,0.8);}
+	::-webkit-scrollbar-thumb:hover {background: rgba(0,0,0,0.5);}
+	::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+	width:16px;height:16px;background:rgba(237,165,65,0.8);} 
+	
 	
 </style>
 </head>
@@ -172,9 +192,10 @@
 				</div>
 				<h1 class="user-name"><%=logginedMember.getNickname()%></h1>
 				<h3 class="user-grade">회원등급 : <%=logginedMember.getGrade() %></h3>
-				<h3 class="user-address">활동 지역 : <%=logginedMember.getAddress()%></h3>
-				<input type="button" value="내 정보 보기" class="user-btn"
+				<h3 class="user-address">활동 지역 : <%=logginedMember.getAddress().split(",")[0]%></h3>
+				<input type="button" value="정보보기" class="user-btn"
 				onclick="location.href='<%=request.getContextPath()%>/memberView?id=<%=logginedMember.getId()%>'"/>
+				<input type="button" class ="user-btn" value="탈퇴하기">
 			</div>		
 		</div>
 		<%if(d==null) {%>
@@ -191,7 +212,7 @@
 					<!-- 강아지 사진 -->
 						<a href="<%=request.getContextPath()%>/addDog?id=<%=logginedMember.getId()%>">
 						<img src="<%=request.getContextPath()%>/img/plus.jpg"
-						style="width:100px;height:100px;margin-left:10px; margin-top:45px;"/>
+						style="width:150px;height:150px;margin-left:10px; margin-top:60px;"/>
 						</a>
 					</div>
 					<div class="status">
@@ -225,7 +246,7 @@
 					<div class="coords">
 					<!-- 강아지 사진 -->
 						
-						<img src="<%=request.getContextPath()%>/upload/dog/<%=d.getDogProfile()%>"
+						<img src="<%=request.getContextPath()%>/upload/dog/<%=d.getDogProfile()==null?"with20200921_193036_167.png":d.getDogProfile()%>"
 						style="width:170px;height:120px;margin-left:50px; margin-top:10px;"/>
 						
 					</div>
@@ -243,11 +264,17 @@
 				<h1><%=d.getDogName()%></h1>
 				<p>견종 : <%=d.getDogBreed2() %></p>
 				<p>생일 : <%=d.getDogBirth().substring(0, 10)%></p>
+				<p>
+					성별 : <%=d.getDogGender().equals("F")?"여":"남"%>
+				</p>
 				<p>중성화 : <%if(d.getDogNeuter().equals("Y")){%>
 							중성
 						<%}else{ %>
 							미중성
 						<%} %>
+				</p>
+				<p>
+					몸무게 : <%=d.getDogWeight()%> kg
 				</p>
 				<span class="more" style="color:red">※마우스를 올려보세요</span>
 			</div>
@@ -255,6 +282,10 @@
 		
 		
 		<%} %>
+		
+		<div class="meet-container">
+		
+		</div>
 	</section>
 	<script>
 		function showProfileChange(){

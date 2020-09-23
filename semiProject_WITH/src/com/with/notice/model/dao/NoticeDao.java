@@ -162,13 +162,21 @@ public class NoticeDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("updateNotice"));
-			pstmt.setString(1, n.getNoticeTitle());
-			pstmt.setString(2, n.getNoticeWriter());
-			pstmt.setString(3, n.getNoticeContent());
-			pstmt.setString(4, n.getNoticeOriginalFileName());
-			pstmt.setString(5, n.getNoticeRenamedFileName());
-			pstmt.setInt(6, n.getNoticeIdx());
+			if(n.getNoticeOriginalFileName()==null) {
+				pstmt=conn.prepareStatement(prop.getProperty("updateNoticeNull"));
+				pstmt.setString(1, n.getNoticeTitle());
+				pstmt.setString(2, n.getNoticeWriter());
+				pstmt.setString(3, n.getNoticeContent());
+				pstmt.setInt(4, n.getNoticeIdx());
+			}else {
+				pstmt=conn.prepareStatement(prop.getProperty("updateNotice"));
+				pstmt.setString(1, n.getNoticeTitle());
+				pstmt.setString(2, n.getNoticeWriter());
+				pstmt.setString(3, n.getNoticeContent());
+				pstmt.setString(4, n.getNoticeOriginalFileName());
+				pstmt.setString(5, n.getNoticeRenamedFileName());
+				pstmt.setInt(6, n.getNoticeIdx());		
+			}
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

@@ -38,7 +38,7 @@
             cursor: pointer;
             border-radius:10px;
             font-weight: bold;
-            background: url( "img/list.png" ) no-repeat rgb(236, 236, 236);
+            background: no-repeat rgb(236, 236, 236);
             background-position:3px center;
         }
         #listbtn:hover {
@@ -57,7 +57,7 @@
             cursor: pointer;
             border-radius:10px;
             font-weight: bold;
-            background: url( "img/trash.png" ) no-repeat rgb(236, 236, 236);
+            background: no-repeat rgb(236, 236, 236);
             background-position:3px center;
         }
         #deletebtn:hover {
@@ -77,7 +77,7 @@
             cursor: pointer;
             border-radius:10px;
             font-weight: bold;
-            background: url( "img/enrollcheck3.png" ) no-repeat black;
+            background:  no-repeat black;
             background-position:3px center;
         }
         #updatebtn:hover {

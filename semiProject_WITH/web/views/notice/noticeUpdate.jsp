@@ -41,27 +41,21 @@
             <tr>
                 <th>첨부파일</th>
 				<td>
-					<%if(n.getNoticeOriginalFileName()==null) {%>
 					
-					<input type="text" id="fileload" name="fileLoad" value="" style="border:none;display:none;"   readonly>
 					
-					<input type="file" id='fileview' name="fileView" style="display: none;">
-                    
-                    
-                    <input type="button" class="fileadd" name="fileadd" value="추가/삭제" onclick="filebutton" style="display:none;">
-                    
-                
-                    
-                    
-					<%}else { %>
-					<input type="text" id="fileload" name="fileLoad" value="<%=n.getNoticeOriginalFileName()%>" style="border:none; display:none;" readonly>
-                    
-					<input type="file" id='fileview' name="fileView" style="display: none;">
-                    
-                    <input type="button" class="fileadd" name="fileadd" value="수정" onclick="filebutton"  style="display:none;">
-                    <input type="button" id="filedeletebtn" name="fileDeletebtn" value="삭제"/>
-                    
-					<%} %>	
+					<!-- <input type="text" id="fileload" name="fileLoad" value="새로운 파일 첨부하기" style="border:none;"   readonly>
+					 -->
+<!-- 					<input type="file" class="fileload" name="fileload" value="" readonly>
+					<input type="file" class="fileview" name="fileview"> 
+                    <input type="button" class="fileadd" name="fileadd" value="추가" > -->
+
+					
+					<input type="text" class="fileload" name="fileLoad" 
+					value="<%=n.getNoticeOriginalFileName()==null?"새로운 파일을 첨부,수정 클릭":n.getNoticeOriginalFileName()%>" style="border:none;" readonly> 
+					<input type="file" class="fileview" name="fileview" >
+                    <button type="button" class="fileadd" name="fileadd" >수정</button>
+                    <button type="button" id="filedeletebtn" name="fileDeletebtn">삭제</button>
+					
 				</td>
             </tr>
            
@@ -77,11 +71,39 @@
   </div>
 	</section>
 	<script>
-	
+	$(document).ready(function(){
+		$(".fileview").hide();
+		let fileCount=0;
+		$(".fileadd").click(function(){
+			if(fileCount==0){
+	    		$(".fileload").hide();
+	    		$(".fileview").show();
+	    		$(".fileadd").html("수정취소");
 
-	$(function(){
+	    		fileCount++;
+			}else{
+				$(".fileload").show();
+	    		$(".fileview").hide();
+	    		$(".fileadd").html("수정");
+	    		fileCount=0;
+			}
+		})
+/* 		$(".fileview").change(function(){
+	    	var file = this.files[0].name;
+	    	console.log(file.name);
+	    	$(".filehidden").value=file;
+	    	console.log($(".filehidden"));
+	    })
+	    
+	    $("#filedeletebtn").click(function(){
+	    	var fileHidden = $(".filehidden").value;
+	    	console.log(fileHidden);
+	    }) */
+	})
+
+	/* $(function(){ */
 		//파일에서 삭제
-    	$(".fileadd").click(function(){
+/*     	$(".fileadd").click(function(){
     		if($('#fileload').css('display') == 'none'){
                 $('#fileload').show();
                 $('#fileview').hide();
@@ -93,10 +115,38 @@
     	
     	$("#filedeletebtn").click(function(){
     		document.getElementById("fileload").value="";
+    		$("#fileview").css("display","none");
+    	}) */
+<%--     	$(".fileview").hide();
+    	
+    	$(".fileadd").click(function(){
+    		if($(".fileview").hide()==true){
+	    		$(".fileload").hide();
+	    		$(".fileview").show();
+	    	}else{
+	    		$(".fileload").show();
+	    		$(".fileview").hide();
+	    	}
     	})
     	
+    	let deleteClick=0;
+    	$("#filedeletebtn").click(function(){
+    		if(deleteClick==0){
+    			$(".fileload").value="";
+    			$("#filedeletebtn").value="삭제취소"
+    			deleteClick++;
+    		}else{
+    			$(".fileload").value="<%=n.getNoticeOriginalFileName()%>";
+    			deleteClick=0;
+    		}
     		
-	});
+    		
+    	})
+    	
+    	
+    		
+	}); --%>
+
 	 
 	
 	//취소버튼누르면 취소확인창 띄우게
@@ -114,18 +164,19 @@
 		frm.attr({
 			"action":url,
 			"method":"post",
+			"enctype":"multipart/form-data"
 		});
 		frm.submit();
 	}
 	
 	function filebutton() {
-		if($('#fileload').css('display')=='none') {
+/* 		if($('#fileload').css('display')=='none') {
 			$('#fileload').show();
 			$('#fileview').hide();
 		}else {
 			$('#fileload').hide();
 			$('#fileview').show();
-		}
+		} */
 	}
 	
 	

@@ -146,6 +146,18 @@ public class DogUpdateEndServlet extends HttpServlet {
 		
 		int result = new DogService().updateDog(d);
 		
+		String msg="";
+		String loc="";
+		if(result>0) {
+			msg="성공적으로 수정되었습니다.";
+			loc="/myPage";
+		}else {
+			msg="내 강아지 정보수정에 실패했습니다.";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp")
+		.forward(request, response);
 	}
 
 	/**

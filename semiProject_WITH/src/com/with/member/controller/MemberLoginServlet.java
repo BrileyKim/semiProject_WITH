@@ -33,7 +33,7 @@ public class MemberLoginServlet extends HttpServlet {
 		// Bring data that client send from "sidebar.jsp"
 		String id=request.getParameter("id");
 		String password=request.getParameter("password");
-		
+		String referer = request.getHeader("Referer");
 		// Deal login logic
 		// check the existence of the data that client sent
 		// Use JDBC
@@ -43,8 +43,7 @@ public class MemberLoginServlet extends HttpServlet {
 			// Store loggined Member to data storing request object
 			HttpSession session = request.getSession();
 			session.setAttribute("logginedMember", m);
-			//Stay the page tha tyou login
-			response.sendRedirect(request.getHeader("Referer"));
+			response.sendRedirect(request.getContextPath());
 		}else {
 			request.setAttribute("msg", "아이디 혹은 비밀번호가 일치하지 않습니다.");
 			request.setAttribute("loc","/");

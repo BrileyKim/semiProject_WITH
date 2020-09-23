@@ -83,15 +83,28 @@ public class DogDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
-			pstmt = conn.prepareStatement(prop.getProperty("updateDog"));
-			pstmt.setString(1, d.getDogName());
-			pstmt.setString(2, d.getDogGender());
-			pstmt.setString(3, d.getDogBreed1());
-			pstmt.setString(4, d.getDogBreed2());
-			pstmt.setDouble(5, d.getDogWeight());
-			pstmt.setString(6, d.getDogBirth());
-			pstmt.setString(7, d.getDogNeuter());
-			pstmt.setString(8, d.getDogProfile());
+			if(d.getDogProfile()==null) {
+				pstmt = conn.prepareStatement(prop.getProperty("updateDogNull"));
+				pstmt.setString(1, d.getDogName());
+				pstmt.setString(2, d.getDogGender());
+				pstmt.setString(3, d.getDogBreed1());
+				pstmt.setString(4, d.getDogBreed2());
+				pstmt.setDouble(5, d.getDogWeight());
+				pstmt.setString(6, d.getDogBirth());
+				pstmt.setString(7, d.getDogNeuter());
+				pstmt.setString(8, d.getDogOwner());
+			}else {
+				pstmt = conn.prepareStatement(prop.getProperty("updateDog"));
+				pstmt.setString(1, d.getDogName());
+				pstmt.setString(2, d.getDogGender());
+				pstmt.setString(3, d.getDogBreed1());
+				pstmt.setString(4, d.getDogBreed2());
+				pstmt.setDouble(5, d.getDogWeight());
+				pstmt.setString(6, d.getDogBirth());
+				pstmt.setString(7, d.getDogNeuter());
+				pstmt.setString(8, d.getDogProfile());
+				pstmt.setString(9, d.getDogOwner());
+			}	
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

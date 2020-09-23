@@ -31,7 +31,7 @@ public class MemberLogoutServlet extends HttpServlet {
 		if(session!=null) {
 			session.invalidate();
 		}
-		response.sendRedirect(request.getHeader("Referer"));
+		response.sendRedirect(request.getContextPath());
 	}
 
 	/**

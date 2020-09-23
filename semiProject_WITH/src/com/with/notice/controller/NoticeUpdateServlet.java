@@ -29,8 +29,9 @@ public class NoticeUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int noticeIdx=Integer.parseInt(request.getParameter("noticeIdx"));
 		
+		int noticeIdx=Integer.parseInt(request.getParameter("noticeIdx"));
+		System.out.println(noticeIdx);
 		Notice n=new NoticeService().selectNoticeOne(noticeIdx);
 	
 		request.setAttribute("notice", n);

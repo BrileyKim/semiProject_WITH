@@ -158,7 +158,7 @@ public class DogAddEndServlet extends HttpServlet {
 			loc="/myPage";
 		}else {
 			msg="내 강아지 등록 실패";
-			loc="/views/member/myPage.jsp";
+			loc="/myPage";
 		}		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
