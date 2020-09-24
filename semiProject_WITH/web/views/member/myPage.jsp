@@ -13,7 +13,7 @@
 	.middle-container{
 		/* background-color:rgba(250,247,242,0.7); */
 		background-color:rgba(114,133,63,0.79);
-		margin-left:60px;
+		margin-left:80px;
 		margin-top:20px;
 		margin-bottom:20px;
 		margin-right:40px;
@@ -62,8 +62,8 @@
 		height:80px;
 	}
 	.myPageDog-container{
-		width:540px;
-		height:320px;
+		width:570px;
+		height:290px;
 		background-color:#fff;
 		background: linear-gradient(#f8f8f8, #fff);
   		box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
@@ -163,11 +163,11 @@
 	  font-size: 0.9em;
 	}
 	
-	.meet-container{
+	.walk-container{
 		width:1060px;
 		height:600px;
 		background-color:rgba(250,247,242,0.7);
-		margin:20px 55px;
+		margin:20px 65px;
 		/* border:1px solid black; */
 		border-radius:3px;
 	}
@@ -203,6 +203,22 @@
 		margin-left:50px;
 		margin-top:20px;
 		border-radius:3px;
+	}
+	.meet-container{
+		float:right;
+		position:absolute;
+		right:170px;
+		top:410px;
+		width:580px;
+		background-color:rgba(209,185,121,0.7);
+		border-radius:2px;
+		text-align:center;
+		overflow: hidden;
+	}
+	
+	.meet-container a{
+		text-decoration:black;
+		color:black;
 	}
 	
 </style>
@@ -311,6 +327,10 @@
 		<%} %>
 		
 		<div class="meet-container">
+			<a href="#"><h2>내 모임 관리하기</h2></a>
+		</div>
+		
+		<div class="walk-container">
 			<div class="cal_top">
                 <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit">&lt;</span></a>
                 <span id="cal_top_year"></span>

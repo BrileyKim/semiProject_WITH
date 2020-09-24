@@ -50,6 +50,7 @@ public class MemberService {
 	public int profileUpdate(String id, String file) {
 		Connection conn = getConnection();
 		int result = dao.profileUpdate(conn,id,file);
+		System.out.println(result);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		return result;

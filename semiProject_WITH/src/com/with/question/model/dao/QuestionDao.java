@@ -276,6 +276,27 @@ public class QuestionDao {
 		
 	}
 	
+	public int deleteQuestionComment(Connection conn,int qcCommentRef, int qcNo, int qcLev) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			if(qcLev==1) {
+				pstmt=conn.prepareStatement(prop.getProperty("deleteMainComment"));
+				pstmt.setInt(1, qcNo);
+			}else if(qcLev==2) {
+				pstmt=conn.prepareStatement(prop.getProperty("deleteComment"));
+				pstmt.setInt(1, qcCommentRef);
+				pstmt.setInt(2, qcNo);
+			}
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 }
 
 

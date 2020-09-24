@@ -91,6 +91,14 @@ public class QuestionService {
 		return result;
 	}
 	
+	public int deleteQuestionComment(int qcCommentRef, int qcNo, int qcLev) {
+		Connection conn = getConnection();
+		int result = dao.deleteQuestionComment(conn,qcCommentRef,qcNo, qcLev);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
 	
 
 }

@@ -228,11 +228,11 @@
 							logginedMember.getId().equals("admin"))) %>
 						
 					
-					<form action="<%=request.getContextPath()%>/ajax/deleteMainComment" id="frm-delete">
+					<form action="<%=request.getContextPath()%>/question/questionCommentDelete" id="frm-delete">
 						<input type="hidden" value="<%=qc.getCommentRef()%>" name="qcCommentRef" id="qaRef">
 						<input type="hidden" value="<%=q.getQuestionIdx()%>" name="qaNo">
 						<input type="hidden" value="<%=qc.getQaCommentNo() %>" name="qcNo">
-						
+						<input type="hidden" value="<%=qc.getQaCommentLevel()%>" name="qcLev">
 						<button class="btn-delete" value="<%=qc.getQaCommentNo()%>">삭제</button>
  					</form>
 				</td>
@@ -245,10 +245,11 @@
 					<p><%=qc.getQaCommentDate()%></p>
 					
 					<p><%=qc.getQaCommentContent() %></p>
-					<form action="<%=request.getContextPath()%>/ajax/deleteComment" id="frm-delete2">
-						<input type="hidden" value="<%=qc.getQaRef()%>" name="qcRef_" id="qaRef_">
-						<input type="hidden" value="<%=q.getQuestionIdx()%>" name="qaNo_">
-						<input type="hidden" value="<%=qc.getQaCommentNo() %>" name="qcNo_">
+					<form action="<%=request.getContextPath()%>/question/questionCommentDelete" id="frm-delete2">
+						<input type="hidden" value="<%=qc.getQaRef()%>" name="qcCommentRef" id="qaRef_">
+						<input type="hidden" value="<%=q.getQuestionIdx()%>" name="qaNo">
+						<input type="hidden" value="<%=qc.getQaCommentNo() %>" name="qcNo">
+						<input type="hidden" value="<%=qc.getQaCommentLevel()%>" name="qcLev">	
 						<button class="btn-delete2" value="<%=qc.getQaCommentNo()%>">삭제</button>
 					</form>
 				</td>
