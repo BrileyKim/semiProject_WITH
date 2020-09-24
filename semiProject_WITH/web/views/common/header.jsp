@@ -10,7 +10,7 @@
 		<div class="header-left">
 			<a class="active" href="#meet">Meet</a>
 			<a class="active" href="<%=request.getContextPath() %>/notice/noticeList">Notice</a>
-			<a class="active" href="#qanda">Q & A</a>
+			<a class="active" href="<%=request.getContextPath() %>/question/questionList">Q & A</a>
 		</div>
 	</div>
 </header>

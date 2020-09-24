@@ -1,4 +1,4 @@
-package com.with.notice.controller;
+package com.with.question.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.with.notice.model.service.NoticeService;
-import com.with.notice.model.vo.Notice;
+import com.with.question.model.service.QuestionService;
+import com.with.question.model.vo.Question;
 
 /**
- * Servlet implementation class NoticeListServlet
+ * Servlet implementation class QAListServlet
  */
-@WebServlet("/notice/noticeList")
-public class NoticeListServlet extends HttpServlet {
+@WebServlet("/question/questionList")
+public class QuestionListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListServlet() {
+    public QuestionListServlet() {
         super();
     }
 
@@ -40,15 +40,15 @@ public class NoticeListServlet extends HttpServlet {
 		String opt = request.getParameter("opt");
 		String condition = request.getParameter("condition");
 		
-		List<Notice> list = new NoticeService().selectNoticeList(spage*3-2,opt,condition);
-		int listCount = new NoticeService().selectNoticeCount(spage*3-2,opt,condition);
+		List<Question> list = new QuestionService().selectQuestionList(spage*5-4,opt,condition);
+		int listCount = new QuestionService().selectQuestionCount(spage*5-4,opt,condition);
 		
 		//the number of total Page
-		int maxPage = (int)(listCount/3.0+0.9);
+		int maxPage = (int)(listCount/5.0+0.9);
 		//start page number
-		int startPage = (int)(spage/3.0+0.8)*3-2;
+		int startPage = (int)(spage/5.0+0.8)*5-4;
 		//last page number
-		int endPage = startPage + 2;
+		int endPage = startPage + 4;
 		if(endPage>maxPage) endPage = maxPage;
 		
 		//store 4 number of page
@@ -58,16 +58,16 @@ public class NoticeListServlet extends HttpServlet {
 		request.setAttribute("endPage", endPage);
 		
 		
-		request.setAttribute("notices", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/views/notice/noticeList.jsp");
+		request.setAttribute("questions", list);
+		RequestDispatcher rd = request.getRequestDispatcher("/views/question/questionList.jsp");
 		rd.forward(request, response);
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
