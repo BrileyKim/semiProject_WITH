@@ -41,21 +41,12 @@
             <tr>
                 <th>첨부파일</th>
 				<td>
-					
-					
-					<!-- <input type="text" id="fileload" name="fileLoad" value="새로운 파일 첨부하기" style="border:none;"   readonly>
-					 -->
-<!-- 					<input type="file" class="fileload" name="fileload" value="" readonly>
-					<input type="file" class="fileview" name="fileview"> 
-                    <input type="button" class="fileadd" name="fileadd" value="추가" > -->
-
-					
-					<input type="text" class="fileload" name="fileLoad" 
-					value="<%=n.getNoticeOriginalFileName()==null?"새로운 파일을 첨부,수정 클릭":n.getNoticeOriginalFileName()%>" style="border:none;" readonly> 
+					<input type="text" id="fileload" name="fileLoad" 
+					value="<%=n.getNoticeOriginalFileName()==null?"새롭게 첨부하시려면 수정을 클릭하세요.":n.getNoticeOriginalFileName()%>" style="border:none;" readonly> 
 					<input type="file" class="fileview" name="fileview" >
                     <button type="button" class="fileadd" name="fileadd" >수정</button>
                     <button type="button" id="filedeletebtn" name="fileDeletebtn">삭제</button>
-					
+					<input type="hidden" id="filehidden" name="filehidden" value=""/>
 				</td>
             </tr>
            
@@ -72,22 +63,42 @@
 	</section>
 	<script>
 	$(document).ready(function(){
-		$(".fileview").hide();
+		$(".fileview").hide();//input type file 부분
 		let fileCount=0;
-		$(".fileadd").click(function(){
+		$(".fileadd").click(function(){ //수정버튼 
 			if(fileCount==0){
-	    		$(".fileload").hide();
+	    		$("#fileload").hide();//input type text부분
 	    		$(".fileview").show();
 	    		$(".fileadd").html("수정취소");
 
 	    		fileCount++;
 			}else{
-				$(".fileload").show();
+				$("#fileload").show();
 	    		$(".fileview").hide();
 	    		$(".fileadd").html("수정");
 	    		fileCount=0;
 			}
 		})
+	
+		$(function(){
+			let deleteCount=0;
+			$("#filedeletebtn").click(function(){
+				if(deleteCount==0){
+					document.getElementById("filehidden").value="delete";
+					$("#fileload").css("color","white");
+					$("#filedeletebtn").html("초기화");
+					console.log(document.getElementById("filehidden").value);
+					deleteCount++;
+				}else{
+					document.getElementById("filehidden").value="";
+					console.log(document.getElementById("filehidden").value);
+					$("#filedeletebtn").html("삭제");
+					$("#fileload").css("color","black");
+					deleteCount=0;
+				}			
+			});
+		});
+	})
 /* 		$(".fileview").change(function(){
 	    	var file = this.files[0].name;
 	    	console.log(file.name);
@@ -99,7 +110,6 @@
 	    	var fileHidden = $(".filehidden").value;
 	    	console.log(fileHidden);
 	    }) */
-	})
 
 	/* $(function(){ */
 		//파일에서 삭제

@@ -158,17 +158,27 @@ public class NoticeDao {
 		}return n;
 	}
 	
-	public int updateNotice(Connection conn, Notice n) {
+	public int updateNotice(Connection conn, Notice n,String hidden) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			if(n.getNoticeOriginalFileName()==null) {
-				pstmt=conn.prepareStatement(prop.getProperty("updateNoticeNull"));
-				pstmt.setString(1, n.getNoticeTitle());
-				pstmt.setString(2, n.getNoticeWriter());
-				pstmt.setString(3, n.getNoticeContent());
-				pstmt.setInt(4, n.getNoticeIdx());
-			}else {
+				if(hidden.equals("delete")) {
+					pstmt=conn.prepareStatement(prop.getProperty("updateNotice"));
+					pstmt.setString(1, n.getNoticeTitle());
+					pstmt.setString(2, n.getNoticeWriter());
+					pstmt.setString(3, n.getNoticeContent());
+					pstmt.setString(4, n.getNoticeOriginalFileName());
+					pstmt.setString(5, n.getNoticeRenamedFileName());
+					pstmt.setInt(6, n.getNoticeIdx());
+				}else {
+					pstmt=conn.prepareStatement(prop.getProperty("updateNoticeNull"));
+					pstmt.setString(1, n.getNoticeTitle());
+					pstmt.setString(2, n.getNoticeWriter());
+					pstmt.setString(3, n.getNoticeContent());
+					pstmt.setInt(4, n.getNoticeIdx());		
+				}
+			}else{
 				pstmt=conn.prepareStatement(prop.getProperty("updateNotice"));
 				pstmt.setString(1, n.getNoticeTitle());
 				pstmt.setString(2, n.getNoticeWriter());
