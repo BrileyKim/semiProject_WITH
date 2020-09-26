@@ -117,7 +117,7 @@
 				dataType:"html",
 				success:data=>{
 					console.log(data);
-					$("#walk").html(data);
+					$("#meetBox").html(data);
 				}
 				
 			});

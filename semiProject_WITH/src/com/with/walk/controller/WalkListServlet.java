@@ -37,6 +37,7 @@ public class WalkListServlet extends HttpServlet {
 		List<Walk> list = new WalkService().selectWalkList(walkMeetIdx);
 		
 		request.setAttribute("walks", list);
+		request.setAttribute("meetIdx", walkMeetIdx);
 		RequestDispatcher rd = request.getRequestDispatcher("/views/walk/walkList.jsp");
 		rd.forward(request, response);
 	}

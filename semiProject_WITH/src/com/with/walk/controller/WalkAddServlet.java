@@ -26,7 +26,11 @@ public class WalkAddServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/walk/walkWrite.jsp")
+		
+		int meetIdx = Integer.parseInt(request.getParameter("meetIdx"));
+		
+		request.setAttribute("meetIdx", meetIdx);
+		request.getRequestDispatcher("/views/walk/walkAdd.jsp")
 		.forward(request, response);
 	}
 

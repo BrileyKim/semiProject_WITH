@@ -3,11 +3,38 @@
 <%@ page import ="java.util.List,com.with.walk.model.vo.Walk" %>    
 <%
 	List<Walk> list = (List<Walk>)request.getAttribute("walks");
+	int meetIdx = (int)request.getAttribute("meetIdx");
 %>
 	
 <style>
 	#plusBtn{
 		float:right;
+	}
+	.cal_top{
+		text-align:center;
+		margin-top:30px;
+		margin-bottom:20px;
+		color:black;
+		
+		font-size:1.5em;
+	}
+	.cal_top a, span{
+		padding-top:10px;
+		color:black;
+	}
+	#cal_tab{
+		margin-right:15px;
+		margin-top:15px;
+		float:right;
+	}
+	.calendar_sidebar{
+		float:left;
+		background-color:rgba(0,0,0,0.3);
+		width:330px;
+		height:450px;
+		margin-left:50px;
+		margin-top:20px;
+		border-radius:3px;
 	}
 
 </style>
@@ -16,7 +43,7 @@
 	<span id="cal_top_year"></span>
 	<span id="cal_top_month"></span>
 	<a href="#" id="moveNextMonth"><span id="nextMonth" class="cal_tit">&gt;</span></a>
-	<a href="<%=request.getContextPath()%>/walk/walkAdd" id="plusBtn"><i class="fas fa-plus"></i></a>
+	<a href="<%=request.getContextPath()%>/walk/walkAdd?meetIdx=<%=meetIdx!=0?meetIdx:""%>" id="plusBtn"><i class="fas fa-plus"></i></a>
 </div>
 <div class="calendar_sidebar">
 
@@ -26,6 +53,7 @@
 </div>
 	
 <script>
+
 	var today = null;
 	var year = null;
 	var month = null;

@@ -137,7 +137,7 @@
 								<tr>
 									<td><%=m.getIdx()%></td>
 									<td>
-										<a href="<%=request.getContextPath()%>/meet/meetView?meet_idx=<%=m.getIdx()%>&id=<%=logginedMember!=null?logginedMember.getId():""%>">
+										<a href="<%=request.getContextPath()%>/meet/meetView?meet_idx=<%=m!=null?m.getIdx():""%>&id=<%=logginedMember!=null?logginedMember.getId():""%>">
 											<%=m.getTitle()%>
 										</a>
 									</td>
