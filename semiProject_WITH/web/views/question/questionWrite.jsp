@@ -41,6 +41,7 @@
 	div#imgWrap>img{width:200px;height:120px;}
 	
 	div#imgWrap img,label{position: absolute;} 
+	
 	div#imgWrap label{color:#D8D8D8; margin-top:45px;margin-left:50px;}
 	#title{
 		width:430px;

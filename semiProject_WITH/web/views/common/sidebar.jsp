@@ -76,6 +76,7 @@
 }
 </style>
 <!-- Create login box -->
+<%if(logginedMember==null){%>
 <div id="loginBox">
 	<form action="<%=request.getContextPath()%>/login" method="post">
 		<div id="login-client">
@@ -101,6 +102,7 @@
 		</div>
 	</form>
 </div>
+<%} %>
 
 <div id="searchSlide">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>

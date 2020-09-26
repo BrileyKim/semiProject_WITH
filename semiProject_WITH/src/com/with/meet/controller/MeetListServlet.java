@@ -1,0 +1,75 @@
+package com.with.meet.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.with.meet.model.service.MeetService;
+import com.with.meet.model.vo.Meet;
+
+/**
+ * Servlet implementation class MeetListServlet
+ */
+@WebServlet("/meet/meetList")
+public class MeetListServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public MeetListServlet() {
+        super();
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//current page number
+				int spage=1;
+				String page = request.getParameter("page");
+				if(page!=null) spage =Integer.parseInt(page);
+				
+				//Bring search condition and search contents
+				String opt = request.getParameter("opt");
+				String condition = request.getParameter("condition");
+				
+				List<Meet> list = new MeetService().selectMeetList(spage*10-9,opt,condition);
+				int listCount = new MeetService().selectMeetCount(spage*10-9,opt,condition);
+				
+				//the number of total Page
+				int maxPage = (int)(listCount/10.0+0.9);
+				//start page number
+				int startPage = (int)(spage/10.0+0.9)*10-9;
+				//last page number
+				int endPage = startPage + 9;
+				if(endPage>maxPage) endPage = maxPage;
+				
+				//store 4 number of page
+				request.setAttribute("spage", spage);
+				request.setAttribute("maxPage", maxPage);
+				request.setAttribute("startPage", startPage);
+				request.setAttribute("endPage", endPage);
+				
+				
+				request.setAttribute("meets", list);
+				RequestDispatcher rd = request.getRequestDispatcher("/views/meet/meetList.jsp");
+				rd.forward(request, response);
+				
+				
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

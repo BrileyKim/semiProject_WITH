@@ -83,6 +83,7 @@
 				</tr>
   				  <!-- 게시물 -->
   				<tr>
+  				<%if(!list.isEmpty()) {%>
 					<%for(Notice n : list) {%>
 				    	<td style="margin-top: 20px;">
 				      		<div id="cardlist" style=""> 
@@ -114,8 +115,9 @@
 					        	</div>
 				      		</div>
 				     	</td> 
-				  <%} %>
+				  	<%}%>
 				  </tr>
+				  <%} %>
 				  <tr>
     			  	<td colspan="3">
     			  		<div id="pageForm">
