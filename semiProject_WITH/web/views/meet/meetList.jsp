@@ -137,7 +137,7 @@
 								<tr>
 									<td><%=m.getIdx()%></td>
 									<td>
-										<a href="<%=request.getContextPath()%>/meet/meetView?meet_idx=<%=m.getIdx()%>&id=<%=logginedMember.getId()%>">
+										<a href="<%=request.getContextPath()%>/meet/meetView?meet_idx=<%=m.getIdx()%>&id=<%=logginedMember!=null?logginedMember.getId():""%>">
 											<%=m.getTitle()%>
 										</a>
 									</td>
@@ -167,12 +167,12 @@
 		        	</c:if>
 				</div>
 				
-				<div id="writeForm">
+<%-- 				<div id="writeForm">
 					<%if(logginedMember!=null) {%>
 					<button type="button" onclick="location.assign('<%=request.getContextPath()%>/meet/meetEnroll')"
 					style="float:right;margin-right:5px;">모임만들기</button>
 					<%} %>
-				</div>
+				</div> --%>
 				<br>
 				<div id="searchForm">
 			        <form>

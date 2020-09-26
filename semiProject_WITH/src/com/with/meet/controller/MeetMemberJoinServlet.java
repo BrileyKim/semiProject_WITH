@@ -34,12 +34,9 @@ public class MeetMemberJoinServlet extends HttpServlet {
 	
 		String id = request.getParameter("id");
 		String title = request.getParameter("title");
-		System.out.println(title);
 		
 		Meet m = new MeetService().getMyMeet(title);
-		
-		System.out.println(m);
-		
+				
 		int headCount = new MeetService().getMyHeadCount(m);
 
 		String msg="";

@@ -90,10 +90,11 @@
 <label id="my-meet-title">&nbsp; 내 모임</label>
 <div id="first">
 	<% if(!(list.size()>0)){ %>
-		<div id="nothing" onclick="location.replace('<%=request.getContextPath()%>/meet/meetWrite');">
+		<div id="nothing" onclick="location.replace('<%=request.getContextPath()%>/meet/meetEnroll');">
 			<i class="fas fa-plus"></i>
 		</div>
 	<%}else{ %>
+	<form id="frm-first" action="<%=request.getContextPath()%>/meet/meetView?meet_idx=<%=list.get(0).getIdx()%>"method="post">
 		<div id="first-front" class="front">
 			<img class="first-img" src="<%=request.getContextPath()%>/upload/meet/<%=list.get(0).getFrontRename()%>">
 			<label class="first-title"><%=list.get(0).getTitle() %></label>
@@ -103,14 +104,17 @@
 			<img class="first-img" src=<%=request.getContextPath()%>/upload/meet/<%=list.get(0).getBackRename()%>>
 			<label class="meet-content"><%=list.get(0).getContent() %></label>
 		</div>
+	</form>
 	<%} %>
 </div>
+
 <div id="second">
 	<%if(!(list.size()>1)) {%>
-		<div id="nothing" onclick="location.replace('<%=request.getContextPath()%>/meet/meetWrite');">
+		<div id="nothing" onclick="location.replace('<%=request.getContextPath()%>/meet/meetEnroll');">
 			<i class="fas fa-plus"></i>
 		</div>
 	<%}else {%>
+	<form id="frm-second" action="<%=request.getContextPath()%>/meet/meetView?meet_idx=<%=list.get(1).getIdx()%>"method="post">
 		<div id="second-front" class="front">
 			<img class="first-img" src="<%=request.getContextPath()%>/upload/meet/<%=list.get(1).getFrontRename()%>">
 			<label class="first-title"><%=list.get(1).getTitle() %></label>
@@ -119,14 +123,16 @@
 			<img class="first-img" src=<%=request.getContextPath()%>/upload/meet/<%=list.get(1).getBackRename()%>>
 			<label class="meet-content"><%=list.get(1).getContent() %></label>
 		</div>
+	</form>	
 	<%} %>
 </div>	
 <div id="third">
 	<%if(!(list.size()>2)) {%>
-		<div id="nothing" onclick="location.replace('<%=request.getContextPath()%>/meet/meetWrite');">
+		<div id="nothing" onclick="location.replace('<%=request.getContextPath()%>/meet/meetEnroll');">
 			<i class="fas fa-plus"></i>
 		</div>
 	<%}else {%>
+	<form id="frm-third" action="<%=request.getContextPath()%>/meet/meetView?meet_idx=<%=list.get(2).getIdx()%>"method="post">
 		<div id="third-front" class="front">
 			<img class="first-img" src="<%=request.getContextPath()%>/upload/meet/<%=list.get(2).getFrontRename()%>">
 			<label class="first-title"><%=list.get(2).getTitle() %></label>
@@ -135,9 +141,34 @@
 			<img class="first-img" src=<%=request.getContextPath()%>/upload/meet/<%=list.get(2).getBackRename()%>>
 			<label class="meet-content"><%=list.get(2).getContent() %></label>
 		</div>
+	</form>
 	<%} %>
 </div>
 <script>
+$(function(){
+	$("#first-front").click(function(){
+		$("#frm-first").submit();
+	});
+	$("#first-back").click(function(){
+		$("#frm-first").submit();
+	})
+});
+$(function(){
+	$("#second-front").click(function(){
+		$("#frm-second").submit();
+	});
+	$("#second-back").click(function(){
+		$("#frm-second").submit();
+	})
+});
+$(function(){
+	$("#third-front").click(function(){
+		$("#frm-third").submit();
+	});
+	$("#third-back").click(function(){
+		$("#frm-third").submit();
+	})
+});
 $(function(){
 	$("#first").hover(function(){
 		$("#first-front").css("z-index","1");

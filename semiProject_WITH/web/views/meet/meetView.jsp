@@ -18,7 +18,7 @@
 		left:15%;
 		top:100px;
 		width:70%;
-		height:200px;
+		height:230px;
 		position:absolute;
 		background-color:rgb(250, 247, 242); 
 		border-radius:3px;
@@ -32,13 +32,30 @@
 		text-align:center;
 		padding-top:16px;
 		display:inline-block;
-		margin: 15px;
+		margin-left:30px;
+		margin-right:30px;
+		margin-top:10px;
+		margin-bottom:10px;
 	}
-	#walk a, #gallery a, #board a{
+	#walk label, #gallery label, #board label{
 		text-decoration:none;
 		color:white;
 		font-size: 23px;
-		
+	}
+	
+	#meetBox{
+		clear:both;
+		margin:10px auto;
+		background-color:white;
+		width:1100px;
+		height:700px;
+		border:1px black solid;
+	}
+	#grade{
+		font-size:23px;
+	}
+	#headCount{
+		font-size:23px;
 	}
 </style>
 </head>
@@ -51,26 +68,31 @@
 			<%if(grade!=null){ %>
 				<label id="grade">내 등급 : <%=grade %></label>
 			<%} %>
+			<br>
 			<label id="headCount" name="headCount">현재 인원 수  : <%=headCount %> / <%=m.getHeadCount() %></label>
+			<br>
 			<div id="walk">
-				<a href="#">산책</a>
+				<label>산책</label>
+				<input type="hidden" id="walkHidden" value="<%=m.getIdx()%>"/>
 			</div>
 			<div id="gallery">
-				<a href="#">갤러리 </a>
+				<label>갤러리 </label>
 			</div>
 			<div id="board">
-				<a href="#">게시판</a>
+				<label>게시판</label>
 			</div>
 			<%if(logginedMember!=null&&grade==null) {%>
 				<input type="button" id="joinBtn" value="가입신청">
 			<%}%>
 		</div>
 		<form id="enrollAccept" action="<%=request.getContextPath()%>/meet/joinMember" method="post">
-			<input type="hidden" name="id" value="<%=logginedMember.getId()%>">
+			<input type="hidden" name="id" value="<%=logginedMember!=null?logginedMember.getId():""%>">
 			<input type="hidden" name="title" value="<%=m.getTitle()%>">
 		</form>
 		
 		<div id="meetBox">
+		
+		
 		</div>
 	</section>
 	
@@ -84,6 +106,22 @@
 				alert("취소되었습니다.")
 			}	
 		});
+		
+		var newValue;
+		$("#walk").on("click",function(){
+			newValue = $("#walkHidden").val();
+			$.ajax({
+				url:"<%=request.getContextPath()%>/walk/walkList",
+				type:"get",
+				data:{"meet_idx":newValue},
+				dataType:"html",
+				success:data=>{
+					console.log(data);
+					$("#walk").html(data);
+				}
+				
+			});
+		})
 	});
 	
 	</script>

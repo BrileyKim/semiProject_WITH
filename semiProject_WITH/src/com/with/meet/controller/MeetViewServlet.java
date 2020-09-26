@@ -36,7 +36,7 @@ public class MeetViewServlet extends HttpServlet {
 		Meet m = new MeetService().selectMeetOne(no);
 		
 		String grade = new MeetService().getMyMeetGrade(id,m);
-		
+				
 		int headCount = new MeetService().getMyHeadCount(m);
 		
 		
