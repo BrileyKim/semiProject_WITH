@@ -82,7 +82,7 @@
 						</td>
 					</tr>
 					<tr>
-    					<td>산책 내용</td>
+    					<td>산책 코스</td>
     					<td><textarea cols="40" rows="6" name="walk_content" id="walk_content">산책 출발점부터 도착지까지 경로를 상세히 설명해주세요.</textarea></td>
     				</tr>
 					<tr>

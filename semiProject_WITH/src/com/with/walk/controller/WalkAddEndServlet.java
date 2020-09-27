@@ -63,7 +63,7 @@ public class WalkAddEndServlet extends HttpServlet {
 		int result = new WalkService().addWalk(w);
 		
 		String msg="";
-		String loc="/meet/meetList";
+		String loc="/meet/meetView?meet_idx="+meetIdx;
 		if(result>0) {
 			
 			Walk w2 = new WalkService().selectWalkOne(writer,title);

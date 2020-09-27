@@ -72,8 +72,9 @@
 			<label id="headCount" name="headCount">현재 인원 수  : <%=headCount %> / <%=m.getHeadCount() %></label>
 			<br>
 			<div id="walk">
-				<label>산책</label>
-				<input type="hidden" id="walkHidden" value="<%=m.getIdx()%>"/>
+				<a href="<%=request.getContextPath()%>/walk/walkList?meet_idx=<%=m.getIdx()%>&id=<%=logginedMember!=null?logginedMember.getId():""%>">
+					<label>산책</label>
+				</a>
 			</div>
 			<div id="gallery">
 				<label>갤러리 </label>
@@ -107,13 +108,13 @@
 			}	
 		});
 		
-		var newValue;
+<%-- 		var newValue;
 		$("#walk").on("click",function(){
 			newValue = $("#walkHidden").val();
 			$.ajax({
-				url:"<%=request.getContextPath()%>/walk/walkList",
+				url:"<%=request.getContextPath()%>/walk/walkList?meet_idx="<%=m.getIdx()%>"&id="<%=logginedMember!=null?logginedMember.getId():""%>",
 				type:"get",
-				data:{"meet_idx":newValue},
+				data:{"meet_idx":newValue,id:'<%=logginedMember!=null?logginedMember.getId():""%>'},
 				dataType:"html",
 				success:data=>{
 					console.log(data);
@@ -121,7 +122,7 @@
 				}
 				
 			});
-		})
+		}) --%>
 	});
 	
 	</script>

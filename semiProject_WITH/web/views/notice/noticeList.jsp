@@ -149,6 +149,7 @@
 					<td colspan="3">
 						<div id="searchForm">
 					        <form>
+					        
 					            <select name="opt">
 					                <option value="0">제목</option>
 					                <option value="1">내용</option>

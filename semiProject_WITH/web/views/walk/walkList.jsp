@@ -1,191 +1,167 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="java.util.List,com.with.walk.model.vo.Walk" %>    
+<%@ page import ="java.util.List,com.with.walk.model.vo.Walk,com.with.member.model.vo.Member" %>    
 <%
 	List<Walk> list = (List<Walk>)request.getAttribute("walks");
 	int meetIdx = (int)request.getAttribute("meetIdx");
+	String meetGrade = (String)request.getAttribute("meetGrade");
 %>
-	
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Walk List</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	#plusBtn{
-		float:right;
+	a{
+		text-decoration:none;
+		color:black;
 	}
-	.cal_top{
-		text-align:center;
-		margin-top:30px;
+	*:focus { outline:none; }
+	#tablediv{
+		background:rgba(114, 133, 63,0.95);
+	  	width:730px;
+	  	height:440px;
+	  	padding:20px;
+	  	margin:20px auto;
+	  	text-align:center;
+	} 
+	.card {
+		background: #ffeddf;
+		border-radius: 40px;
+		display: inline-block;
+		width: 180px;
+		height:200px;
 		margin-bottom:20px;
-		color:black;
-		
-		font-size:1.5em;
+		position: relative;
+		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	    /* transition: all 0.1s cubic-bezier(.25,.8,.25,1); */
 	}
-	.cal_top a, span{
-		padding-top:10px;
-		color:black;
+	.card:hover {
+  		/* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
+  		border: orange 2px solid;
 	}
-	#cal_tab{
-		margin-right:15px;
-		margin-top:15px;
-		float:right;
-	}
-	.calendar_sidebar{
-		float:left;
-		background-color:rgba(0,0,0,0.3);
-		width:330px;
-		height:450px;
-		margin-left:50px;
-		margin-top:20px;
-		border-radius:3px;
-	}
-
+	#writebtn{
+            width:80px;
+            height: 30px;
+            color:black;
+            border: none;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            
+            cursor: pointer;
+            border-radius:3px;
+            font-weight: bold;
+            background: rgb(236, 236, 236);
+            background-position:3px center;
+    }
+        #writebtn:hover {
+        background-color: rgb(199, 197, 197);
+    }
+    #backtable{
+    	width:730px;
+    	height:440px;
+    	background-color:rgb(250, 247, 242);
+    	padding:0;
+    	margin:auto;
+    	position:fixed;
+    }
 </style>
-<div class="cal_top">
-	<a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit">&lt;</span></a>
-	<span id="cal_top_year"></span>
-	<span id="cal_top_month"></span>
-	<a href="#" id="moveNextMonth"><span id="nextMonth" class="cal_tit">&gt;</span></a>
-	<a href="<%=request.getContextPath()%>/walk/walkAdd?meetIdx=<%=meetIdx!=0?meetIdx:""%>" id="plusBtn"><i class="fas fa-plus"></i></a>
-</div>
-<div class="calendar_sidebar">
+</head>
+<body>
+	<%@ include file="/views/common/header.jsp" %>
+	<section id="walk-container">
+		<%@ include file="/views/common/sidebar.jsp" %>
+		<div id="tablediv">
+			
+			<table id="backtable">
+				<tr>
+					<td style="padding:0; height:100px;" colspan="3">
+						<p style="font-size:35px; margin:0;">전체 산책 보기</p>
+					<button type="button" style="float:left; padding:4px; margin-left:10px; background-color:white; border-radius:2px; border:1px solid rgba(0,0,0,0.4); font-size:15px;">우리 모임 메인 화면으로 돌아가기 </button>
+					</td>
+				</tr>
 
-</div>
-<div id="cal_tab" class="cal">
-         
-</div>
-	
-<script>
+				<tr>
+			<%if(list!=null){
+				for(Walk w : list){%>
+					<td style="margin-top: 10px;">
+						<div id="cardlist" style=""> 
+							<div class="card" onclick="location.href='<%=request.getContextPath() %>/walk/walkView?walkIdx=<%=w.getWalkNo()%>&meetIdx=<%=meetIdx%>'" >		
+								<table style="width:180px;">
+									<tr>
+										<td  style="text-align: left; padding-top:20px; padding-left: 20px;">
+											<%if(w.getWalkTitle().length()>8){%>
+												<%=w.getWalkTitle().substring(0,8) %>
+											<%} else{%>
+												<%=w.getWalkTitle()%>
+											<%} %>
+										</td>
+									</tr>
+									<tr>
+										<td    style="text-align: left; padding-top:30px; padding-left: 20px; font-size:20px">
+											<%=w.getWalkWriter()%>
+										</td>
+									</tr>
+									<tr>
+										<td style="text-align: right; padding-top:50px; padding-right: 20px;">
+											<%=w.getWalkDate().substring(0,10)%>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</td>
+			<%	}%>
+			</tr>
+			<%}%>
+			<tr>
+				<td colspan="3">
+					<div id="pageForm">
+						<c:if test="${startPage!= 1}">
+			            	<a href='<%=request.getContextPath()%>/walk/walkList?page=${startPage-1}'>[이전]</a>
+			        	</c:if>
+			        	<c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
+			            <c:if test="${pageNum == spage}">
+			                ${pageNum}&nbsp;
+			            </c:if>
+			            <c:if test="${pageNum != spage}">
+			                <a href='<%=request.getContextPath()%>/walk/walkList?page=${pageNum}'>${pageNum}&nbsp;</a>
+			            </c:if>
+			        	</c:forEach>
+			        
+			       		 <c:if test="${endPage != maxPage }">
+			            <a href='<%=request.getContextPath()%>/walk/walkList?page=${endPage+1 }'>[다음]</a>
+			        	</c:if>
+					</div> 
+					
+			   				<%if(logginedMember!=null && meetGrade!=null){ %>
+			  				<button onclick="location.assign('<%=request.getContextPath()%>/walk/walkAdd?meetIdx=<%=meetIdx%>')" style="float:right; margin-top: 0;" id="writebtn">산책 만들기</button>
+			  				<%} %>
 
-	var today = null;
-	var year = null;
-	var month = null;
-	var firstDay = null;
-	var lastDay = null;
-	var $tdDay = null;
-	var $tdSche = null;
-	
-	$(document).ready(function() {
-	    drawCalendar();
-	    initDate();
-	    drawDays();
-	    $("#movePrevMonth").on("click", function(){movePrevMonth();});
-	    $("#moveNextMonth").on("click", function(){moveNextMonth();});
-	});
-	
-	//calendar 그리기
-	function drawCalendar(){
-	    var setTableHTML = "";
-	    setTableHTML+='<table class="calendar">';
-	    setTableHTML+='<tr align=left><th></th><th>SUN</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr>';
-	    for(var i=0;i<6;i++){
-	        setTableHTML+='<tr height="80">';
-	            setTableHTML+='<th style="font-size:2em;">';
-	        for(var j=0;j<7;j++){
-	
-	            setTableHTML+='<td class="tds" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:70px;font-size:1.6em">';
-	            setTableHTML+='    <div class="cal-day"></div>';
-	            setTableHTML+='    <div class="cal-schedule"></div>';
-	            setTableHTML+='</td>';
-	        }
-	        setTableHTML+='</tr>';
-	    }
-	    setTableHTML+='</table>';
-	    $("#cal_tab").html(setTableHTML);
-	
-	    $(".cal-day").one("mousedown",function(){
-	    var a =$(this).text();
-	    var c = "";
-	    if(month==1){
-	        c="January";
-	    }else if(month==2){
-	        c="February";
-	    }else if(month==3){
-	        c="March";
-	    }else if(month==4){
-	        c="April";
-	    }else if(month==5){
-	        c="May";
-	    }else if(month==6){
-	        c="June";
-	    }else if(month==7){
-	        c="July";
-	    }else if(month==8){
-	        c="August";
-	    }else if(month==9){
-	        c="September";
-	    }else if(month==10){
-	        c="October";
-	    }else if(month==11){
-	        c="November";
-	    }else if(month==12){
-	        c="December";
-	    }  
-	    var b = document.getElementById("sample");
-	    b.append(c);
-	    var d = document.getElementById("sample2");
-	    d.append(a);
-	
-	    })
-	}
-	
-	//날짜 초기화
-	function initDate(){
-	    $tdDay = $("td div.cal-day")
-	    $tdSche = $("td div.cal-schedule")
-	    dayCount = 0;
-	    today = new Date();
-	    year = today.getFullYear();
-	    month = today.getMonth()+1;
-	    firstDay = new Date(year,month-1,1);
-	    lastDay = new Date(year,month,0);
-	}
-	//calendar 날짜표시
-	function drawDays(){
-	    $("#cal_top_year").text(year+"년");
-	    $("#cal_top_month").text(month+"월");
-	    // console.log($(".sample").text(month));
-	    for(var i=firstDay.getDay();i<firstDay.getDay()+lastDay.getDate();i++){
-	        $tdDay.eq(i).text(++dayCount);
-	    }
-	    for(var i=0;i<42;i+=7){
-	        $tdDay.eq(i).css("color","#dc2742");
-	    }
-	    for(var i=6;i<42;i+=7){
-	        $tdDay.eq(i).css("color","blue");
-	    }
-	}
-	
-	//calendar 월 이동
-	function movePrevMonth(){
-	    month--;
-	    if(month<=0){
-	        month=12;
-	        year--;
-	    }
-	    if(month<10){
-	        month=String("0"+month);
-	    }
-	    getNewInfo();
-	 }
-	
-	function moveNextMonth(){
-	    month++;
-	    if(month>12){
-	        month=1;
-	        year++;
-	    }
-	    if(month<10){
-	        month=String("0"+month);
-	    }
-	    getNewInfo();
-	}
-	
-	function getNewInfo(){
-	    for(var i=0;i<42;i++){
-	        $tdDay.eq(i).text("");
-	    }
-	    dayCount=0;
-	    firstDay = new Date(year,month-1,1);
-	    lastDay = new Date(year,month,0);
-	    drawDays();
-	}
-
-</script>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<div id="searchForm">
+				        <form>
+				        <input type="hidden" name="meet_idx" value="<%=meetIdx%>">
+				            <select name="opt">
+				                <option value="0">산책 이름</option>
+				                <option value="1">산책 설명</opstion>
+				                <option value="2">산책 이름+설명</option>
+				                <option value="3">산책 대표</option>
+				            </select>
+				            <input type="text" size="20" name="condition">&nbsp;
+				            <input type="submit" value="검색">
+				        </form>    
+					</div>
+				</td>
+			</tr>
+			
+			</table>
+		</div>
+	</section>
+</body>
+</html>
