@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.with.dog.model.vo.Dog" %>
+<%@ page import="com.with.dog.model.vo.Dog, com.with.walk.model.vo.Walk,java.util.List,com.with.walk.model.vo.WalkAccept" %>
 <%	
 		Dog d = (Dog)request.getAttribute("dog");
+		List<Walk> list = (List<Walk>)request.getAttribute("walk1");
+		List<WalkAccept> list2=(List<WalkAccept>)request.getAttribute("walkAccepts");
 %>
 <!DOCTYPE html>
 <html>
@@ -162,14 +164,19 @@
 	  right: 1rem;
 	  font-size: 0.9em;
 	}
+
 	
 	.walk-container{
 		width:1060px;
-		height:600px;
+		height:300px;
 		background-color:rgba(250,247,242,0.7);
-		margin:20px 65px;
+		margin:20px auto;
 		/* border:1px solid black; */
 		border-radius:3px;
+		padding:10px;
+	}
+	.walk-container h2{
+		margin-top:0;
 	}
 		::-webkit-scrollbar{width: 15px;}
 	::-webkit-scrollbar-track {background-color:#f1f1f1;}
@@ -220,7 +227,27 @@
 		text-decoration:black;
 		color:black;
 	}
-	
+	.day{
+		width:140px;
+		height:100px;
+	}
+	#calTbl{
+		
+		text-align:center;
+		font-size:22px;
+	}
+	.bottom{
+	margin:20px auto;
+	width:990px;
+	padding-top:20px;
+	}
+	#walk-calendar{
+		width:1060px;
+		height:300px;
+		margin:20px auto;
+		border:1px black solid;
+		border-radius:5px;
+	}
 </style>
 </head>
 <body>
@@ -304,6 +331,7 @@
 				</div>
 			</div>
 			<div class="general">
+				
 				<h1><%=d.getDogName()%></h1>
 				<p>견종 : <%=d.getDogBreed2() %></p>
 				<p>생일 : <%=d.getDogBirth().substring(0, 10)%></p>
@@ -331,7 +359,45 @@
 		</div>
 		
 		<div class="walk-container">
-			<div class="cal_top">
+			<h2>현재 참여 중인 산책</h2>
+			<table>
+				<tr>
+					
+					<td>내가 대표인 산책이 <%=!list.isEmpty()?list.size():0%>개 있습니다.</td>
+				</tr>
+				<!-- 이부분 계속 null뜸 -->
+				<%if(!list2.isEmpty()){
+					for(WalkAccept wa : list2) {
+						if(wa.getAcceptCheck().equals("미처리")){%>
+				
+				<tr>
+					<td>산책 번호 <%=wa.getAcceptWalkIdx()%>에서 <%=wa.getAcceptMemberId()%>님의 신청을 수락하시겠습니까?</td>
+
+				</tr>
+				<tr>
+					<td>
+						<form action="<%=request.getContextPath()%>/walk/memberJoinEnd">
+							<input type="radio" id="ok" name="accept_check" value="Y">
+							<label for="ok">수락</label>
+							<input type="radio" id="no" name="accept_check" value="N">
+							<label for="no">거절</label>
+							<input type="hidden" name="accept_walk_idx" value="<%=wa.getAcceptWalkIdx()%>">
+							<input type="hidden" name="accept_member_id" value="<%=wa.getAcceptMemberId()%>">
+							<input type="submit" id="submitBtn" value="확정하기">
+						</form>
+					</td>
+				</tr>
+				<%}
+				} 
+			}else{%> 
+				<tr>
+					<td>새로운 산책 참여 신청이 없습니다.</td>
+				</tr>
+			<% }%> 
+			</table>
+			
+		
+<!-- 			<div class="cal_top">
                 <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit">&lt;</span></a>
                 <span id="cal_top_year"></span>
                 <span id="cal_top_month"></span>
@@ -342,11 +408,96 @@
             </div>
             <div id="cal_tab" class="cal">
             
-            </div>
-		</div>
+            </div> -->
+		
+<!-- 		<div id="walk-calendar">
+			<div class="top" style="text-align:center;">
+				<h2> 2020년 10월의 산책</h2>
+			</div>
+			<div class="bottom">
+				<table id="calTbl">
+					<tr>
+						<th style="color:#dc2742"><div class="day" id="sun">일</div></th>
+						<th><div class="day" id="mon">월</div></th>
+						<th><div class="day">화</div></th>
+						<th><div class="day">수</div></th>
+						<th><div class="day">목</div></th>
+						<th><div class="day">금</div></th>
+						<th style="color:blue"><div class="day">토</div></th>
+					</tr>
+					<tr>
+						<td style="color:#dc2742"></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><div class="day" id="1">1</div></td>
+						<td><div class="day" id="2">2</div></td>
+						<td style="color:blue"><div class="day" id="3">3</div></td>
+					</tr>
+					<tr>
+						<td style="color:#dc2742"><div class="day" id="4">4</div></td>
+						<td><div class="day" id="5">5</div></td>
+						<td><div class="day" id="6">6</div></td>
+						<td><div class="day" id="7">7</div></td>
+						<td><div class="day" id="8">8</div></td>
+						<td><div class="day" id="9">9</div></td>
+						<td style="color:blue"><div class="day" id="10">10</div></td>
+					</tr>
+					<tr>
+						<td style="color:#dc2742"><div class="day" id="11">11</div></td>
+						<td><div class="day" id="12">12</div></td>
+						<td><div class="day" id="13">13</div></td>
+						<td><div class="day" id="14">14</div></td>
+						<td><div class="day" id="15">15</div></td>
+						<td><div class="day" id="16">16</div></td>
+						<td style="color:blue"><div class="day" id="17">17</div></td>
+					</tr>
+					<tr>
+						<td style="color:#dc2742"><div class="day" id="18">18</div></td>
+						<td><div class="day" id="19">19</div></td>
+						<td><div class="day" id="20">20</div></td>
+						<td><div class="day" id="21">21</div></td>
+						<td><div class="day" id="22">22</div></td>
+						<td><div class="day" id="23">23</div></td>
+						<td style="color:blue"><div class="day" id="24">24</div></td>
+					</tr>
+					<tr>
+						<td style="color:#dc2742"><div class="day" id="25">25</div></td>
+						<td><div class="day" id="26">26</div></td>
+						<td><div class="day" id="27">27</div></td>
+						<td><div class="day" id="28">28</div></td>
+						<td><div class="day" id="29">29</div></td>
+						<td><div class="day" id="30">30</div></td>
+						<td style="color:blue"><div class="day" id="31">31</div></td>
+					</tr>
+				
+				</table>
+			</div>
+		
+		</div> -->
 	</section>
+<%-- 	<%if(!list.isEmpty()) {
+		int i=0;
+		for(i=0;i<list.size();i++){
+			%>
+			<input type="hidden" class="chkMon" id="<%=list.get(i).getWalkDate().substring(6,8)%>">
+			<input type="hidden" class="chkDay" id="<%=list.get(i).getWalkDate().substring(8,10)%>">
+	<%	}
+	} %> --%>
 	<script>
-	    var today = null;
+/* 	$(document).ready(function(){
+		var days = document.getElementsByClassName("day");
+		for(var i=0;i<days.length;i++){
+			var day = days.item(i);
+			console.log(day.id);
+
+			}
+		var chkMons = document.getElementsByClassName("chkMon");
+		for(var j=0;j<chkMons.length;j++){
+			console.log(chkMons.id);
+		}
+	}) */
+	    /* var today = null;
 	    var year = null;
 	    var month = null;
 	    var firstDay = null;
@@ -478,7 +629,7 @@
             firstDay = new Date(year,month-1,1);
             lastDay = new Date(year,month,0);
             drawDays();
-        }
+        } */
 	
 		function showProfileChange(){
 			const url = "<%=request.getContextPath()%>/changeProfile";

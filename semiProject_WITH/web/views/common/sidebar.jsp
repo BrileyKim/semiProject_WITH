@@ -10,6 +10,7 @@
 	and jquery library-->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/sidebar.css">
 <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 /* W I T H title label */
 #login-client>label{
@@ -107,15 +108,32 @@
 <div id="searchSlide">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 	        <form>
-	            <select name="search-Opt" id="search-Opt">
+	            <select name="opt" id="search-Opt">
 	                <option value="0">모임</option>
 	                <option value="1">사용자</option>
 	                <option value="2">산책</option>
 	            </select>
 	            <br>
-	            <input type="text" size="20" name="searchText" id="searchText">&nbsp;
+	            <input type="text" size="20" name="condition" id="searchText">&nbsp;
 	            <input type="submit" value="검색" id="searchSubmit">
 	        </form> 
+	        <div id="pageForm">
+				<c:if test="${startPage!= 1}">
+	            	<a href='<%=request.getContextPath()%>/notice/noticeList?page=${startPage-1}'>[이전]</a>
+	        	</c:if>
+	        	<c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
+	            <c:if test="${pageNum == spage}">
+	                ${pageNum}&nbsp;
+	            </c:if>
+	            <c:if test="${pageNum != spage}">
+	                <a href='<%=request.getContextPath()%>/notice/noticeList?page=${pageNum}'>${pageNum}&nbsp;</a>
+	            </c:if>
+	        	</c:forEach>
+	        
+	       		 <c:if test="${endPage != maxPage }">
+	            <a href='<%=request.getContextPath()%>/notice/noticeList?page=${endPage+1 }'>[다음]</a>
+	        	</c:if>
+			</div>
 </div>
 
 <!-- Create side-bar div tag -->

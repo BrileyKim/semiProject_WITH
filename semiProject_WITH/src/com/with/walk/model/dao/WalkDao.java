@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.with.meet.model.vo.Accept;
+import com.with.meet.model.vo.Meet;
 import com.with.walk.model.vo.Walk;
+import com.with.walk.model.vo.WalkAccept;
 import com.with.walk.model.vo.WalkMember;
 
 public class WalkDao {
@@ -26,6 +29,37 @@ public class WalkDao {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Walk> selectMyWalk(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Walk> list = new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMyWalk"));
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Walk w=new Walk();
+				w.setWalkNo(rs.getInt("walk_no"));
+				w.setWalkMeetIdx(rs.getInt("walk_meet_idx"));
+				w.setWalkWriter(rs.getString("walk_writer"));
+				w.setWalkTitle(rs.getString("walk_title"));
+				w.setWalkHeadCount(rs.getInt("walk_headcount"));
+				w.setWalkDate(rs.getString("walk_date"));
+				w.setWalkHour(rs.getInt("walk_hour"));
+				w.setWalkMinute(rs.getInt("walk_minute"));
+				w.setWalkContent(rs.getString("walk_content"));
+				w.setWalkReadcount(rs.getInt("walk_readcount"));
+				w.setWalkEnrolldate(rs.getDate("walk_enrolldate"));
+				list.add(w);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
 	}
 	
 	public Walk selectWalkOne(Connection conn, String writer, String title) {
@@ -266,6 +300,133 @@ public class WalkDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public int enrollWalkMember(Connection conn,String walkIdx,String memberId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("enrollWalkMember"));
+			pstmt.setString(1, walkIdx);
+			pstmt.setString(2, memberId);
+			pstmt.setString(3, "일반");
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int walkAcceptChange(Connection conn, String yesNo, String walkIdx, String memberId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("walkAcceptChange"));
+			pstmt.setString(1, "처리");
+			pstmt.setString(2, yesNo);
+			pstmt.setString(3, walkIdx);
+			pstmt.setString(4, memberId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public WalkAccept checkWalkAccept(Connection conn, Walk w, String id) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		WalkAccept check=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("checkWalkAccept"));
+			pstmt.setInt(1, w.getWalkNo());
+			pstmt.setString(2, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				check=new WalkAccept();
+				check.setAcceptWalkNo(rs.getInt("ACCPET_NO"));
+				check.setAcceptWalkIdx(rs.getInt("ACCEPT_WALK_IDX"));
+				check.setAcceptMemberId(rs.getString("ACCEPT_MEMBER_ID"));
+				check.setAcceptCheck(rs.getString("ACCEPT_CHECK"));
+				check.setAcceptYn(rs.getString("ACCEPT_YN"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return check;
+	}
+	
+	public List<WalkAccept> checkMyWalkAccept(Connection conn, String id){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<WalkAccept> list = new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("checkMyWalkAccept"));
+			pstmt.setString(1, id);
+			pstmt.setNString(2, "대표");
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				WalkAccept check=new WalkAccept();
+				check.setAcceptWalkNo(rs.getInt("ACCPET_NO"));
+				check.setAcceptWalkIdx(rs.getInt("ACCEPT_WALK_IDX"));
+				check.setAcceptMemberId(rs.getString("ACCEPT_MEMBER_ID"));
+				check.setAcceptCheck(rs.getString("ACCEPT_CHECK"));
+				check.setAcceptYn(rs.getString("ACCEPT_YN"));
+				list.add(check);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public int enrollAccept(Connection conn,Walk w,String id) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("enrollAccept"));
+			pstmt.setInt(1, w.getWalkNo());
+			pstmt.setString(2, id);
+			pstmt.setString(3, "미처리");
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public String getMyWalkGrade(Connection conn,String id,int walkNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String grade=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getMyWalkGrade"));
+			pstmt.setInt(1,walkNo);
+			pstmt.setString(2, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				grade=rs.getString("WALK_GRADE");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return grade;
 	}
 
 }

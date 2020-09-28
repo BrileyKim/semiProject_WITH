@@ -1,6 +1,8 @@
 package com.with.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.with.dog.model.service.DogService;
 import com.with.dog.model.vo.Dog;
+import com.with.walk.model.service.WalkService;
+import com.with.walk.model.vo.Walk;
+import com.with.walk.model.vo.WalkAccept;
 
 /**
  * Servlet implementation class MemberMyPageServlet
@@ -35,7 +40,23 @@ public class MemberMyPageServlet extends HttpServlet {
 		String id=request.getParameter("id");
 		
 		Dog d = new DogService().selectDogOne(id);
+		
+		List<Walk> list = new WalkService().selectMyWalk(id);
+		if(!list.isEmpty()) {
+			List<WalkAccept> list2 = new WalkService().checkMyWalkAccept(id);
+			request.setAttribute("walkAccepts", list2);
+		}
+			
 	
+		
+		
+			
+		
+		
+		request.setAttribute("walk1", list);
+		
+		
+		
 		request.setAttribute("dog", d);			
 		
 		

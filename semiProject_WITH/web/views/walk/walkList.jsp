@@ -88,7 +88,7 @@
 				for(Walk w : list){%>
 					<td style="margin-top: 10px;">
 						<div id="cardlist" style=""> 
-							<div class="card" onclick="location.href='<%=request.getContextPath() %>/walk/walkView?walkIdx=<%=w.getWalkNo()%>&meetIdx=<%=meetIdx%>'" >		
+							<div class="card" onclick="location.href='<%=request.getContextPath() %>/walk/walkView?walkIdx=<%=w.getWalkNo()%>&meetIdx=<%=meetIdx%>&id=<%=logginedMember!=null?logginedMember.getId():""%>'" >		
 								<table style="width:180px;">
 									<tr>
 										<td  style="text-align: left; padding-top:20px; padding-left: 20px;">

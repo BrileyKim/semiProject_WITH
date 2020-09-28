@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.with.meet.model.service.MeetService;
+import com.with.meet.model.vo.Meet;
 import com.with.walk.model.service.WalkService;
 import com.with.walk.model.vo.Walk;
 
@@ -31,6 +33,12 @@ public class WalkViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int walkIdx = Integer.parseInt(request.getParameter("walkIdx"));
 		String meetIdx = request.getParameter("meetIdx");
+		Meet m = new MeetService().selectMeetOne(Integer.parseInt(meetIdx));
+		String id = request.getParameter("id");
+		
+		String meetGrade = new MeetService().getMyMeetGrade(id,m);
+		String walkGrade = new WalkService().getMyWalkGrade(id,walkIdx);
+
 		
 /*		String date = "";
 		
@@ -60,6 +68,8 @@ public class WalkViewServlet extends HttpServlet {
 			request.setAttribute("walk",w);
 			request.setAttribute("headCount", headCount);
 			request.setAttribute("meetIdx", meetIdx);
+			request.setAttribute("meetGrade", meetGrade);
+			request.setAttribute("walkGrade", walkGrade);
 			view="/views/walk/walkView.jsp";
 		}
 		request.getRequestDispatcher(view).forward(request,response);

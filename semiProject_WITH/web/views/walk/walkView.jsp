@@ -5,6 +5,8 @@
 	Walk w=(Walk)request.getAttribute("walk");
 	int headCount = (int)request.getAttribute("headCount");
 	String meetIdx = (String)request.getAttribute("meetIdx");
+	String meetGrade = (String)request.getAttribute("meetGrade");
+	String walkGrade = (String) request.getAttribute("walkGrade");
 %>
 <!DOCTYPE html>
 <html>
@@ -64,6 +66,13 @@
 		<h2><%=w.getWalkTitle()%></h2>
 		<table id="tbl-walk">
 			<tr>
+				<td colspan="2">
+					<%if(logginedMember!=null&&meetGrade!=null&&walkGrade==null) {%>
+						<input type="button" id="joinBtn" value="가입신청">
+					<%}%>
+				</td>
+			</tr>
+			<tr>
 				<th>산책 대표</th>
 				<td><input type="text" id="walk_writer" value="<%=w.getWalkWriter()%>" readonly></td>
 			</tr>
@@ -96,8 +105,22 @@
 			</tr>
 		</table>
 	</div>
+	<form id="enrollAccept" action="<%=request.getContextPath()%>/walk/memberJoin" method="post">
+			<input type="hidden" name="id" value="<%=logginedMember!=null?logginedMember.getId():""%>">
+			<input type="hidden" name="walk_idx" value="<%=w.getWalkNo()%>">
+	</form>
 </section>
 <script>
+	$(function(){
+		$("#joinBtn").click(function(){
+			if(confirm('<%=w.getWalkTitle()%> 산책에 참여하시겠습니까?')){
+				$("#enrollAccept").submit();
+			}else{
+				alert("취소되었습니다.");
+			}
+		})	
+	});
+	
 	$(document).ready(function(){
 		var walkDate='<%=w.getWalkDate()%>';
 		var yyyy=walkDate.substr(0,4);
